@@ -40,7 +40,7 @@
 */
 
 typedef int32_t increment_t ;
-typedef float	coeff_t ;
+typedef SRC_SAMPLE_T	coeff_t ;
 typedef int _CHECK_SHIFT_BITS[2 * (SHIFT_BITS < sizeof (increment_t) * 8 - 1) - 1]; /* sanity check. */
 
 #ifdef ENABLE_SINC_FAST_CONVERTER
@@ -70,7 +70,7 @@ typedef struct
 	/* Sure hope noone does more than 128 channels at once. */
 	double left_calc [MAX_CHANNELS], right_calc [MAX_CHANNELS] ;
 
-	float	*buffer ;
+	SRC_SAMPLE_T	*buffer ;
 } SINC_FILTER ;
 
 static SRC_ERROR sinc_multichan_vari_process (SRC_STATE *state, SRC_DATA *data) ;
@@ -246,7 +246,7 @@ sinc_filter_new (int converter_type, int channels)
 		priv->b_len += 1 ; // There is a <= check against samples_in_hand requiring a buffer bigger than the calculation above
 
 
-		priv->buffer = (float *) calloc (priv->b_len + channels, sizeof (float)) ;
+		priv->buffer = (SRC_SAMPLE_T *) calloc (priv->b_len + channels, sizeof (priv->buffer [0])) ;
 		if (!priv->buffer)
 		{
 			free (priv) ;
@@ -324,8 +324,7 @@ sinc_reset (SRC_STATE *state)
 	memset (filter->buffer, 0, filter->b_len * sizeof (filter->buffer [0])) ;
 
 	/* Set this for a sanity check */
-	memset (filter->buffer + filter->b_len, 0xAA, state->channels * sizeof (filter->buffer [0])) ;
-} /* sinc_reset */
+	memset (filter->buffer + filter->b_len, 0xAA, state->channels * sizeof (filter->buffer [0])) ;} /* sinc_reset */
 
 static SRC_STATE *
 sinc_copy (SRC_STATE *state)
@@ -349,14 +348,14 @@ sinc_copy (SRC_STATE *state)
 		return NULL ;
 	}
 	memcpy (to_filter, from_filter, sizeof (SINC_FILTER)) ;
-	to_filter->buffer = (float *) malloc (sizeof (float) * (from_filter->b_len + state->channels)) ;
+	to_filter->buffer = (SRC_SAMPLE_T *) malloc (sizeof (to_filter->buffer [0]) * (from_filter->b_len + state->channels)) ;
 	if (!to_filter->buffer)
 	{
 		free (to) ;
 		free (to_filter) ;
 		return NULL ;
 	}
-	memcpy (to_filter->buffer, from_filter->buffer, sizeof (float) * (from_filter->b_len + state->channels)) ;
+	memcpy (to_filter->buffer, from_filter->buffer, sizeof (to_filter->buffer [0]) * (from_filter->b_len + state->channels)) ;
 
 	to->private_data = to_filter ;
 
@@ -439,10 +438,6 @@ sinc_mono_vari_process (SRC_STATE *state, SRC_DATA *data)
 
 	filter = (SINC_FILTER*) state->private_data ;
 
-	/* If there is not a problem, this will be optimised out. */
-	if (sizeof (filter->buffer [0]) != sizeof (data->data_in [0]))
-		return SRC_ERR_SIZE_INCOMPATIBILITY ;
-
 	filter->in_count = data->input_frames * state->channels ;
 	filter->out_count = data->output_frames * state->channels ;
 	filter->in_used = filter->out_gen = 0 ;
@@ -497,9 +492,9 @@ sinc_mono_vari_process (SRC_STATE *state, SRC_DATA *data)
 
 		start_filter_index = double_to_fp (input_index * float_increment) ;
 
-		data->data_out [filter->out_gen] = (float) ((float_increment / filter->index_inc) *
-										calc_output_single (filter, increment, start_filter_index)) ;
-		filter->out_gen ++ ;
+		src_store_api_sample (data->data_out + filter->out_gen,
+								(float_increment / filter->index_inc) *
+								calc_output_single (filter, increment, start_filter_index)) ;		filter->out_gen ++ ;
 
 		/* Figure out the next index. */
 		input_index += 1.0 / src_ratio ;
@@ -580,7 +575,7 @@ calc_output_stereo (SINC_FILTER *filter, int channels, increment_t increment, in
 	while (filter_index > MAKE_INCREMENT_T (0)) ;
 
 	for (int ch = 0; ch < 2; ch++)
-		output [ch] = (float) (scale * (left [ch] + right [ch])) ;
+		src_store_api_sample (output + ch, scale * (left [ch] + right [ch])) ;
 } /* calc_output_stereo */
 
 SRC_ERROR
@@ -594,10 +589,6 @@ sinc_stereo_vari_process (SRC_STATE *state, SRC_DATA *data)
 		return SRC_ERR_NO_PRIVATE ;
 
 	filter = (SINC_FILTER*) state->private_data ;
-
-	/* If there is not a problem, this will be optimised out. */
-	if (sizeof (filter->buffer [0]) != sizeof (data->data_in [0]))
-		return SRC_ERR_SIZE_INCOMPATIBILITY ;
 
 	filter->in_count = data->input_frames * state->channels ;
 	filter->out_count = data->output_frames * state->channels ;
@@ -736,7 +727,7 @@ calc_output_quad (SINC_FILTER *filter, int channels, increment_t increment, incr
 	while (filter_index > MAKE_INCREMENT_T (0)) ;
 
 	for (int ch = 0; ch < 4; ch++)
-		output [ch] = (float) (scale * (left [ch] + right [ch])) ;
+		src_store_api_sample (output + ch, scale * (left [ch] + right [ch])) ;
 } /* calc_output_quad */
 
 SRC_ERROR
@@ -750,10 +741,6 @@ sinc_quad_vari_process (SRC_STATE *state, SRC_DATA *data)
 		return SRC_ERR_NO_PRIVATE ;
 
 	filter = (SINC_FILTER*) state->private_data ;
-
-	/* If there is not a problem, this will be optimised out. */
-	if (sizeof (filter->buffer [0]) != sizeof (data->data_in [0]))
-		return SRC_ERR_SIZE_INCOMPATIBILITY ;
 
 	filter->in_count = data->input_frames * state->channels ;
 	filter->out_count = data->output_frames * state->channels ;
@@ -891,7 +878,7 @@ calc_output_hex (SINC_FILTER *filter, int channels, increment_t increment, incre
 	while (filter_index > MAKE_INCREMENT_T (0)) ;
 
 	for (int ch = 0; ch < 6; ch++)
-		output [ch] = (float) (scale * (left [ch] + right [ch])) ;
+		src_store_api_sample (output + ch, scale * (left [ch] + right [ch])) ;
 } /* calc_output_hex */
 
 SRC_ERROR
@@ -905,10 +892,6 @@ sinc_hex_vari_process (SRC_STATE *state, SRC_DATA *data)
 		return SRC_ERR_NO_PRIVATE ;
 
 	filter = (SINC_FILTER*) state->private_data ;
-
-	/* If there is not a problem, this will be optimised out. */
-	if (sizeof (filter->buffer [0]) != sizeof (data->data_in [0]))
-		return SRC_ERR_SIZE_INCOMPATIBILITY ;
 
 	filter->in_count = data->input_frames * state->channels ;
 	filter->out_count = data->output_frames * state->channels ;
@@ -1054,7 +1037,7 @@ calc_output_multi (SINC_FILTER *filter, increment_t increment, increment_t start
 	while (filter_index > MAKE_INCREMENT_T (0)) ;
 
 	for(int ch = 0; ch < channels; ch++)
-		output [ch] = (float) (scale * (left [ch] + right [ch])) ;
+		src_store_api_sample (output + ch, scale * (left [ch] + right [ch])) ;
 
 	return ;
 } /* calc_output_multi */
@@ -1070,10 +1053,6 @@ sinc_multichan_vari_process (SRC_STATE *state, SRC_DATA *data)
 		return SRC_ERR_NO_PRIVATE ;
 
 	filter = (SINC_FILTER*) state->private_data ;
-
-	/* If there is not a problem, this will be optimised out. */
-	if (sizeof (filter->buffer [0]) != sizeof (data->data_in [0]))
-		return SRC_ERR_SIZE_INCOMPATIBILITY ;
 
 	filter->in_count = data->input_frames * state->channels ;
 	filter->out_count = data->output_frames * state->channels ;
@@ -1195,8 +1174,8 @@ prepare_data (SINC_FILTER *filter, int channels, SRC_DATA *data, int half_filter
 	if (len < 0 || filter->b_end + len > filter->b_len)
 		return SRC_ERR_SINC_PREPARE_DATA_BAD_LEN ;
 
-	memcpy (filter->buffer + filter->b_end, data->data_in + filter->in_used,
-						len * sizeof (filter->buffer [0])) ;
+	/* Copy API samples into the internal precision buffer. */
+	src_copy_api_to_internal (filter->buffer + filter->b_end, data->data_in + filter->in_used, len) ;
 
 	filter->b_end += len ;
 	filter->in_used += len ;
