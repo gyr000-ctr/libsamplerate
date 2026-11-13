@@ -30,7 +30,10 @@ CLEANFILES = src/src_sinc.s
 # MinGW requires -no-undefined if a DLL is to be built.
 src_libsamplerate_la_LDFLAGS = -no-undefined -version-info $(SHARED_VERSION_INFO) $(SHLIB_VERSION_ARG)
 src_libsamplerate_la_SOURCES = src/samplerate.c src/src_sinc.c src/src_zoh.c src/src_linear.c \
+	src/src_sinc_double.c src/src_zoh_double.c src/src_linear_double.c \
 	src/common.h src/fastest_coeffs.h src/mid_qual_coeffs.h src/high_qual_coeffs.h
+
+EXTRA_DIST += src/src_sinc_body.c src/src_zoh_body.c src/src_linear_body.c
 
 #-------------------------------------------------------------------------------
 # An extra check for bad asm.
@@ -56,7 +59,7 @@ AUTOHEADER=echo
 
 dist_doc_DATA = docs/SRC.png docs/SRC.css docs/index.md docs/license.md docs/history.md \
 	docs/download.md docs/lists.md docs/quality.md docs/win32.md docs/faq.md docs/api.md \
-	docs/api_simple.md docs/api_callback.md docs/api_full.md docs/api_misc.md docs/bugs.md
+	docs/api_simple.md docs/api_callback.md docs/api_full.md docs/api_misc.md docs/api_double.md docs/bugs.md
 
 #############
 # examples/ #
@@ -82,6 +85,7 @@ TESTS = \
 	tests/callback_hang_test \
 	tests/callback_test \
 	tests/clone_test \
+	tests/double_test \
 	tests/downsample_test \
 	tests/float_short_test \
 	tests/misc_test \
@@ -129,6 +133,9 @@ tests_callback_test_LDADD = src/libsamplerate.la
 
 tests_float_short_test_SOURCES = tests/float_short_test.c tests/util.c tests/util.h
 tests_float_short_test_LDADD = src/libsamplerate.la
+
+tests_double_test_SOURCES = tests/double_test.c tests/util.c tests/util.h
+tests_double_test_LDADD = src/libsamplerate.la
 
 tests_downsample_test_SOURCES = tests/downsample_test.c tests/util.c tests/util.h
 tests_downsample_test_LDADD = src/libsamplerate.la

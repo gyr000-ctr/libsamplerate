@@ -36,9 +36,23 @@ add_library(samplerate
   samplerate.c
   ${PROJECT_SOURCE_DIR}/include/samplerate.h
   src_linear.c
+  src_linear_body.c
+  src_linear_double.c
   src_sinc.c
+  src_sinc_body.c
+  src_sinc_double.c
   src_zoh.c
+  src_zoh_body.c
+  src_zoh_double.c
   $<$<AND:$<BOOL:${WIN32}>,$<BOOL:${BUILD_SHARED_LIBS}>>:../Win32/libsamplerate-0.def>)
+
+# The *_body.c files are type-parametric templates included by the
+# float/double instantiation units above, not compiled on their own.
+set_source_files_properties(
+  src_linear_body.c
+  src_sinc_body.c
+  src_zoh_body.c
+  PROPERTIES HEADER_FILE_ONLY TRUE)
 
 # ALIAS to use if libsamplerate is included from other project with add_subdirectory()
 add_library(SampleRate::samplerate ALIAS samplerate)

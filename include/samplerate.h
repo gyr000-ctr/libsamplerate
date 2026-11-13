@@ -35,6 +35,21 @@ typedef struct
 	double	src_ratio ;
 } SRC_DATA ;
 
+/* SRC_DATA_D is the double precision analogue of SRC_DATA, used to pass
+** data to src_simple_double() and src_process_double().
+*/
+typedef struct
+{	const double	*data_in ;
+	double	*data_out ;
+
+	long	input_frames, output_frames ;
+	long	input_frames_used, output_frames_gen ;
+
+	int		end_of_input ;
+
+	double	src_ratio ;
+} SRC_DATA_D ;
+
 /*
 ** User supplied callback function type for use with src_callback_new()
 ** and src_callback_read(). First parameter is the same pointer that was
@@ -53,6 +68,14 @@ typedef long (*src_callback_t) (void *cb_data, float **data) ;
 */
 
 SRC_STATE* src_new (int converter_type, int channels, int *error) ;
+
+/*
+**	Double precision initialisation function : same converters and quality
+**	settings as src_new(), but the converter state processes double
+**	precision sample data (see src_process_double()/src_simple_double()).
+*/
+
+SRC_STATE* src_new_double (int converter_type, int channels, int *error) ;
 
 /*
 ** Clone a handle : return an anonymous pointer to a new converter
@@ -86,6 +109,14 @@ SRC_STATE* src_delete (SRC_STATE *state) ;
 int src_process (SRC_STATE *state, SRC_DATA *data) ;
 
 /*
+**	Double precision processing function for states created by
+**	src_new_double(). Filter coefficients and accumulation are evaluated
+**	in double precision. Returns non zero on error.
+*/
+
+int src_process_double (SRC_STATE *state, SRC_DATA_D *data) ;
+
+/*
 **	Callback based processing function. Read up to frames worth of data from
 **	the converter int *data and return frames read or -1 on error.
 */
@@ -99,6 +130,13 @@ long src_callback_read (SRC_STATE *state, double src_ratio, long frames, float *
 */
 
 int src_simple (SRC_DATA *data, int converter_type, int channels) ;
+
+/*
+**	Double precision simple interface : same as src_simple() but with
+**	double precision input and output buffers.
+*/
+
+int src_simple_double (SRC_DATA_D *data, int converter_type, int channels) ;
 
 /*
 ** This library contains a number of different sample rate converters,

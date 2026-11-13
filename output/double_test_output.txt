@@ -1,0 +1,72 @@
+
+    Part A : double precision sinc vs direct convolution reference :
+	double_vs_ref	(Best Sinc Interpolator, ratio = 0.800) : frames 3276/3276, max abs diff = 0.00e+00 ok
+	double_vs_ref	(Medium Sinc Interpolator, ratio = 0.800) : frames 3276/3276, max abs diff = 0.00e+00 ok
+	double_vs_ref	(Fastest Sinc Interpolator, ratio = 0.800) : frames 3276/3276, max abs diff = 0.00e+00 ok
+	double_vs_ref	(Best Sinc Interpolator, ratio = 1.500) : frames 6144/6144, max abs diff = 0.00e+00 ok
+	double_vs_ref	(Medium Sinc Interpolator, ratio = 1.500) : frames 6144/6144, max abs diff = 0.00e+00 ok
+	double_vs_ref	(Fastest Sinc Interpolator, ratio = 1.500) : frames 6144/6144, max abs diff = 0.00e+00 ok
+
+    Part B : single vs double precision difference :
+	float_vs_double	(Best Sinc Interpolator, ch = 1, ratio = 1.500) : max = 6.73e-08, rms = 1.51e-08, diff SNR =  149.5 dB
+CSV,float_vs_double,0,1,1.500,6144,6.728601e-08,1.512626e-08,149.49
+		distance to reference : double = 0.00e+00, float = 6.73e-08
+CSV,distance_to_reference,0,1,1.500,0.000000e+00,6.728601e-08
+	float_vs_double	(Best Sinc Interpolator, ch = 2, ratio = 1.500) : max = 7.37e-08, rms = 1.52e-08, diff SNR =  149.5 dB
+CSV,float_vs_double,0,2,1.500,6145,7.369145e-08,1.516113e-08,149.47
+	float_vs_double	(Medium Sinc Interpolator, ch = 1, ratio = 1.500) : max = 6.99e-08, rms = 1.67e-08, diff SNR =  148.6 dB
+CSV,float_vs_double,1,1,1.500,6144,6.987890e-08,1.671099e-08,148.62
+		distance to reference : double = 0.00e+00, float = 6.99e-08
+CSV,distance_to_reference,1,1,1.500,0.000000e+00,6.987890e-08
+	float_vs_double	(Medium Sinc Interpolator, ch = 2, ratio = 1.500) : max = 6.99e-08, rms = 1.66e-08, diff SNR =  148.7 dB
+CSV,float_vs_double,1,2,1.500,6145,6.987890e-08,1.660816e-08,148.68
+	float_vs_double	(Fastest Sinc Interpolator, ch = 1, ratio = 1.500) : max = 7.69e-08, rms = 1.71e-08, diff SNR =  148.4 dB
+CSV,float_vs_double,2,1,1.500,6144,7.688032e-08,1.709711e-08,148.42
+		distance to reference : double = 0.00e+00, float = 7.69e-08
+CSV,distance_to_reference,2,1,1.500,0.000000e+00,7.688032e-08
+	float_vs_double	(Fastest Sinc Interpolator, ch = 2, ratio = 1.500) : max = 7.69e-08, rms = 1.71e-08, diff SNR =  148.4 dB
+CSV,float_vs_double,2,2,1.500,6145,7.688032e-08,1.710145e-08,148.42
+	float_vs_double	(ZOH Interpolator, ch = 1, ratio = 1.500) : max = 2.98e-08, rms = 1.11e-08, diff SNR =  152.2 dB
+CSV,float_vs_double,3,1,1.500,6145,2.979731e-08,1.107951e-08,152.19
+	float_vs_double	(ZOH Interpolator, ch = 2, ratio = 1.500) : max = 2.98e-08, rms = 1.11e-08, diff SNR =  152.2 dB
+CSV,float_vs_double,3,2,1.500,6145,2.979731e-08,1.107936e-08,152.19
+	float_vs_double	(Linear Interpolator, ch = 1, ratio = 1.500) : max = 5.23e-08, rms = 1.27e-08, diff SNR =  150.7 dB
+CSV,float_vs_double,4,1,1.500,6144,5.230407e-08,1.272205e-08,150.66
+	float_vs_double	(Linear Interpolator, ch = 2, ratio = 1.500) : max = 5.28e-08, rms = 1.26e-08, diff SNR =  150.7 dB
+CSV,float_vs_double,4,2,1.500,6144,5.281828e-08,1.258802e-08,150.75
+
+    Part C : chunked streaming vs one shot (double) :
+	streaming	(Best Sinc Interpolator, ch = 1, ratio = 1.300) : 6500 vs 6500 frames ok
+	streaming	(Medium Sinc Interpolator, ch = 2, ratio = 1.300) : 6501 vs 6501 frames ok
+	streaming	(Fastest Sinc Interpolator, ch = 2, ratio = 0.700) : 3500 vs 3500 frames ok
+	streaming	(Linear Interpolator, ch = 2, ratio = 1.300) : 6501 vs 6500 frames ok
+	streaming	(ZOH Interpolator, ch = 1, ratio = 0.700) : 3501 vs 3501 frames ok
+
+    Part D : API guards and produces-output sanity :
+	precision_mismatch ........................................ ok
+	produces_output	(Best Sinc Interpolator, ch = 1, ratio = 0.0990) ... ok
+	produces_output	(Best Sinc Interpolator, ch = 2, ratio = 0.3333) ... ok
+	produces_output	(Best Sinc Interpolator, ch = 3, ratio = 0.7890) ... ok
+	produces_output	(Best Sinc Interpolator, ch = 1, ratio = 1.9000) ... ok
+	produces_output	(Best Sinc Interpolator, ch = 2, ratio = 3.1000) ... ok
+	produces_output	(Medium Sinc Interpolator, ch = 1, ratio = 0.0990) ... ok
+	produces_output	(Medium Sinc Interpolator, ch = 2, ratio = 0.3333) ... ok
+	produces_output	(Medium Sinc Interpolator, ch = 3, ratio = 0.7890) ... ok
+	produces_output	(Medium Sinc Interpolator, ch = 1, ratio = 1.9000) ... ok
+	produces_output	(Medium Sinc Interpolator, ch = 2, ratio = 3.1000) ... ok
+	produces_output	(Fastest Sinc Interpolator, ch = 1, ratio = 0.0990) ... ok
+	produces_output	(Fastest Sinc Interpolator, ch = 2, ratio = 0.3333) ... ok
+	produces_output	(Fastest Sinc Interpolator, ch = 3, ratio = 0.7890) ... ok
+	produces_output	(Fastest Sinc Interpolator, ch = 1, ratio = 1.9000) ... ok
+	produces_output	(Fastest Sinc Interpolator, ch = 2, ratio = 3.1000) ... ok
+	produces_output	(ZOH Interpolator, ch = 1, ratio = 0.0990) ... ok
+	produces_output	(ZOH Interpolator, ch = 2, ratio = 0.3333) ... ok
+	produces_output	(ZOH Interpolator, ch = 3, ratio = 0.7890) ... ok
+	produces_output	(ZOH Interpolator, ch = 1, ratio = 1.9000) ... ok
+	produces_output	(ZOH Interpolator, ch = 2, ratio = 3.1000) ... ok
+	produces_output	(Linear Interpolator, ch = 1, ratio = 0.0990) ... ok
+	produces_output	(Linear Interpolator, ch = 2, ratio = 0.3333) ... ok
+	produces_output	(Linear Interpolator, ch = 3, ratio = 0.7890) ... ok
+	produces_output	(Linear Interpolator, ch = 1, ratio = 1.9000) ... ok
+	produces_output	(Linear Interpolator, ch = 2, ratio = 3.1000) ... ok
+

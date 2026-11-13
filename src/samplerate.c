@@ -18,14 +18,20 @@
 #include	"samplerate.h"
 #include	"common.h"
 
-static SRC_STATE *psrc_set_converter (int converter_type, int channels, int *error) ;
+static SRC_STATE *psrc_set_converter (int converter_type, int channels, int precision, int *error) ;
 
 
 SRC_STATE *
 src_new (int converter_type, int channels, int *error)
 {
-	return psrc_set_converter (converter_type, channels, error) ;
+	return psrc_set_converter (converter_type, channels, SRC_PRECISION_FLOAT, error) ;
 } /* src_new */
+
+SRC_STATE *
+src_new_double (int converter_type, int channels, int *error)
+{
+	return psrc_set_converter (converter_type, channels, SRC_PRECISION_DOUBLE, error) ;
+} /* src_new_double */
 
 SRC_STATE*
 src_clone (SRC_STATE* orig, int *error)
@@ -81,8 +87,14 @@ src_delete (SRC_STATE *state)
 	return NULL ;
 } /* src_state */
 
-int
-src_process (SRC_STATE *state, SRC_DATA *data)
+/*
+** Shared control logic for src_process() and src_process_double().
+** Operates on the precision-agnostic SRC_DATA_GEN view of the user
+** buffers ; the public entry points below are thin wrappers around it.
+*/
+
+static int
+src_process_gen (SRC_STATE *state, SRC_DATA_GEN *data)
 {
 	int error ;
 
@@ -110,14 +122,14 @@ src_process (SRC_STATE *state, SRC_DATA *data)
 	if (data->output_frames < 0)
 		data->output_frames = 0 ;
 
-	if (data->data_in < data->data_out)
-	{	if (data->data_in + data->input_frames * state->channels > data->data_out)
+	if ((const char *) data->data_in < (const char *) data->data_out)
+	{	if ((const char *) data->data_in + data->input_frames * state->channels * data->elem_size > (const char *) data->data_out)
 		{	/*-printf ("\n\ndata_in: %p    data_out: %p\n",
 				(void*) (data->data_in + data->input_frames * psrc->channels), (void*) data->data_out) ;-*/
 			return SRC_ERR_DATA_OVERLAP ;
 			} ;
 		}
-	else if (data->data_out + data->output_frames * state->channels > data->data_in)
+	else if ((const char *) data->data_out + data->output_frames * state->channels * data->elem_size > (const char *) data->data_in)
 	{	/*-printf ("\n\ndata_in : %p   ouput frames: %ld    data_out: %p\n", (void*) data->data_in, data->output_frames, (void*) data->data_out) ;
 
 		printf ("data_out: %p (%p)    data_in: %p\n", (void*) data->data_out,
@@ -140,12 +152,74 @@ src_process (SRC_STATE *state, SRC_DATA *data)
 		error = state->vt->vari_process (state, data) ;
 
 	return error ;
+} /* src_process_gen */
+
+int
+src_process (SRC_STATE *state, SRC_DATA *data)
+{
+	SRC_DATA_GEN gen ;
+
+	if (state == NULL)
+		return SRC_ERR_BAD_STATE ;
+
+	if (state->precision != SRC_PRECISION_FLOAT)
+		return SRC_ERR_BAD_PRECISION ;
+
+	if (data == NULL)
+		return src_process_gen (state, NULL) ;
+
+	memset (&gen, 0, sizeof (gen)) ;
+	gen.data_in = data->data_in ;
+	gen.data_out = data->data_out ;
+	gen.input_frames = data->input_frames ;
+	gen.output_frames = data->output_frames ;
+	gen.end_of_input = data->end_of_input ;
+	gen.src_ratio = data->src_ratio ;
+	gen.elem_size = (int) sizeof (float) ;
+
+	int error = src_process_gen (state, &gen) ;
+
+	data->input_frames_used = gen.input_frames_used ;
+	data->output_frames_gen = gen.output_frames_gen ;
+
+	return error ;
 } /* src_process */
+
+int
+src_process_double (SRC_STATE *state, SRC_DATA_D *data)
+{
+	SRC_DATA_GEN gen ;
+
+	if (state == NULL)
+		return SRC_ERR_BAD_STATE ;
+
+	if (state->precision != SRC_PRECISION_DOUBLE)
+		return SRC_ERR_BAD_PRECISION ;
+
+	if (data == NULL)
+		return src_process_gen (state, NULL) ;
+
+	memset (&gen, 0, sizeof (gen)) ;
+	gen.data_in = data->data_in ;
+	gen.data_out = data->data_out ;
+	gen.input_frames = data->input_frames ;
+	gen.output_frames = data->output_frames ;
+	gen.end_of_input = data->end_of_input ;
+	gen.src_ratio = data->src_ratio ;
+	gen.elem_size = (int) sizeof (double) ;
+
+	int error = src_process_gen (state, &gen) ;
+
+	data->input_frames_used = gen.input_frames_used ;
+	data->output_frames_gen = gen.output_frames_gen ;
+
+	return error ;
+} /* src_process_double */
 
 long
 src_callback_read (SRC_STATE *state, double src_ratio, long frames, float *data)
 {
-	SRC_DATA	src_data ;
+	SRC_DATA_GEN	src_data ;
 
 	long	output_frames_gen ;
 	int		error = 0 ;
@@ -161,12 +235,18 @@ src_callback_read (SRC_STATE *state, double src_ratio, long frames, float *data)
 		return 0 ;
 		} ;
 
+	if (state->precision != SRC_PRECISION_FLOAT)
+	{	state->error = SRC_ERR_BAD_PRECISION ;
+		return 0 ;
+		} ;
+
 	if (state->callback_func == NULL)
 	{	state->error = SRC_ERR_NULL_CALLBACK ;
 		return 0 ;
 		} ;
 
 	memset (&src_data, 0, sizeof (src_data)) ;
+	src_data.elem_size = (int) sizeof (float) ;
 
 	/* Check src_ratio is in range. */
 	if (is_bad_src_ratio (src_ratio))
@@ -205,16 +285,16 @@ src_callback_read (SRC_STATE *state, double src_ratio, long frames, float *data)
 		** SRC_MODE_CALLBACK.
 		*/
 		state->mode = SRC_MODE_PROCESS ;
-		error = src_process (state, &src_data) ;
+		error = src_process_gen (state, &src_data) ;
 		state->mode = SRC_MODE_CALLBACK ;
 
 		if (error != 0)
 			break ;
 
-		src_data.data_in += src_data.input_frames_used * state->channels ;
+		src_data.data_in = (const float *) src_data.data_in + src_data.input_frames_used * state->channels ;
 		src_data.input_frames -= src_data.input_frames_used ;
 
-		src_data.data_out += src_data.output_frames_gen * state->channels ;
+		src_data.data_out = (float *) src_data.data_out + src_data.output_frames_gen * state->channels ;
 		src_data.output_frames -= src_data.output_frames_gen ;
 
 		output_frames_gen += src_data.output_frames_gen ;
@@ -392,6 +472,8 @@ src_strerror (int error)
 				return "Internal error : Bad length in prepare_data ()." ;
 		case SRC_ERR_BAD_INTERNAL_STATE :
 				return "Error : Someone is trampling on my internal state." ;
+		case SRC_ERR_BAD_PRECISION :
+				return "Sample precision of the data does not match the converter state." ;
 
 		case SRC_ERR_MAX_ERROR :
 				return "Placeholder. No error defined for this error number." ;
@@ -423,6 +505,23 @@ src_simple (SRC_DATA *src_data, int converter, int channels)
 
 	return error ;
 } /* src_simple */
+
+int
+src_simple_double (SRC_DATA_D *src_data, int converter, int channels)
+{	SRC_STATE	*src_state ;
+	int 		error ;
+
+	if ((src_state = src_new_double (converter, channels, &error)) == NULL)
+		return error ;
+
+	src_data->end_of_input = 1 ; /* Only one buffer worth of input. */
+
+	error = src_process_double (src_state, src_data) ;
+
+	src_delete (src_state) ;
+
+	return error ;
+} /* src_simple_double */
 
 void
 src_short_to_float_array (const short *in, float *out, int len)
@@ -487,7 +586,7 @@ src_float_to_int_array (const float *in, int *out, int len)
 */
 
 static SRC_STATE *
-psrc_set_converter (int converter_type, int channels, int *error)
+psrc_set_converter (int converter_type, int channels, int precision, int *error)
 {
 	SRC_ERROR temp_error;
 	SRC_STATE *state ;
@@ -495,30 +594,43 @@ psrc_set_converter (int converter_type, int channels, int *error)
 	{
 #ifdef ENABLE_SINC_BEST_CONVERTER
 	case SRC_SINC_BEST_QUALITY :
-		state = sinc_state_new (converter_type, channels, &temp_error) ;
+		state = (precision == SRC_PRECISION_DOUBLE)
+			? sinc_state_new_double (converter_type, channels, &temp_error)
+			: sinc_state_new (converter_type, channels, &temp_error) ;
 		break ;
 #endif
 #ifdef ENABLE_SINC_MEDIUM_CONVERTER
 	case SRC_SINC_MEDIUM_QUALITY :
-		state = sinc_state_new (converter_type, channels, &temp_error) ;
+		state = (precision == SRC_PRECISION_DOUBLE)
+			? sinc_state_new_double (converter_type, channels, &temp_error)
+			: sinc_state_new (converter_type, channels, &temp_error) ;
 		break ;
 #endif
 #ifdef ENABLE_SINC_FAST_CONVERTER
 	case SRC_SINC_FASTEST :
-		state = sinc_state_new (converter_type, channels, &temp_error) ;
+		state = (precision == SRC_PRECISION_DOUBLE)
+			? sinc_state_new_double (converter_type, channels, &temp_error)
+			: sinc_state_new (converter_type, channels, &temp_error) ;
 		break ;
 #endif
 	case SRC_ZERO_ORDER_HOLD :
-		state = zoh_state_new (channels, &temp_error) ;
+		state = (precision == SRC_PRECISION_DOUBLE)
+			? zoh_state_new_double (channels, &temp_error)
+			: zoh_state_new (channels, &temp_error) ;
 		break ;
 	case SRC_LINEAR :
-		state = linear_state_new (channels, &temp_error) ;
+		state = (precision == SRC_PRECISION_DOUBLE)
+			? linear_state_new_double (channels, &temp_error)
+			: linear_state_new (channels, &temp_error) ;
 		break ;
 	default :
 		temp_error = SRC_ERR_BAD_CONVERTER ;
 		state = NULL ;
 		break ;
 	}
+
+	if (state)
+		state->precision = precision ;
 
 	if (error)
 		*error = (int) temp_error ;

@@ -103,6 +103,35 @@ enum SRC_MODE
 	SRC_MODE_CALLBACK	= 1
 } ;
 
+/* Sample precision of a converter state. */
+enum SRC_PRECISION
+{
+	SRC_PRECISION_FLOAT	= 0,
+	SRC_PRECISION_DOUBLE	= 1
+} ;
+
+/*
+** Precision-agnostic internal view of the user supplied data buffers.
+** The public SRC_DATA (float) and SRC_DATA_D (double) structs are both
+** converted to this form so that all of the control logic (buffer
+** management, ratio handling, const/vari dispatch) is shared between
+** the single and double precision paths.
+*/
+typedef struct SRC_DATA_GEN_tag
+{	const void	*data_in ;
+	void		*data_out ;
+
+	long	input_frames, output_frames ;
+	long	input_frames_used, output_frames_gen ;
+
+	int		end_of_input ;
+
+	double	src_ratio ;
+
+	/* Size in bytes of one sample (sizeof (float) or sizeof (double)). */
+	int		elem_size ;
+} SRC_DATA_GEN ;
+
 typedef enum SRC_ERROR
 {
 	SRC_ERR_NO_ERROR = 0,
@@ -129,6 +158,7 @@ typedef enum SRC_ERROR
 	SRC_ERR_NO_VARIABLE_RATIO,
 	SRC_ERR_SINC_PREPARE_DATA_BAD_LEN,
 	SRC_ERR_BAD_INTERNAL_STATE,
+	SRC_ERR_BAD_PRECISION,
 
 	/* This must be the last error number. */
 	SRC_ERR_MAX_ERROR
@@ -137,10 +167,10 @@ typedef enum SRC_ERROR
 typedef struct SRC_STATE_VT_tag
 {
 	/* Varispeed process function. */
-	SRC_ERROR		(*vari_process) (SRC_STATE *state, SRC_DATA *data) ;
+	SRC_ERROR		(*vari_process) (SRC_STATE *state, SRC_DATA_GEN *data) ;
 
 	/* Constant speed process function. */
-	SRC_ERROR		(*const_process) (SRC_STATE *state, SRC_DATA *data) ;
+	SRC_ERROR		(*const_process) (SRC_STATE *state, SRC_DATA_GEN *data) ;
 
 	/* State reset. */
 	void			(*reset) (SRC_STATE *state) ;
@@ -161,6 +191,9 @@ struct SRC_STATE_tag
 	SRC_ERROR	error ;
 	int		channels ;
 
+	/* SRC_PRECISION_FLOAT or SRC_PRECISION_DOUBLE */
+	int		precision ;
+
 	/* SRC_MODE_PROCESS or SRC_MODE_CALLBACK */
 	enum SRC_MODE	mode ;
 
@@ -174,23 +207,26 @@ struct SRC_STATE_tag
 	void	*private_data ;
 } ;
 
-/* In src_sinc.c */
+/* In src_sinc.c / src_sinc_double.c */
 const char* sinc_get_name (int src_enum) ;
 const char* sinc_get_description (int src_enum) ;
 
 SRC_STATE *sinc_state_new (int converter_type, int channels, SRC_ERROR *error) ;
+SRC_STATE *sinc_state_new_double (int converter_type, int channels, SRC_ERROR *error) ;
 
-/* In src_linear.c */
+/* In src_linear.c / src_linear_double.c */
 const char* linear_get_name (int src_enum) ;
 const char* linear_get_description (int src_enum) ;
 
 SRC_STATE *linear_state_new (int channels, SRC_ERROR *error) ;
+SRC_STATE *linear_state_new_double (int channels, SRC_ERROR *error) ;
 
-/* In src_zoh.c */
+/* In src_zoh.c / src_zoh_double.c */
 const char* zoh_get_name (int src_enum) ;
 const char* zoh_get_description (int src_enum) ;
 
 SRC_STATE *zoh_state_new (int channels, SRC_ERROR *error) ;
+SRC_STATE *zoh_state_new_double (int channels, SRC_ERROR *error) ;
 
 /*----------------------------------------------------------
 ** SIMD optimized math functions.

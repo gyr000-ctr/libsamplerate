@@ -43,3 +43,11 @@
 	global:
 		src_clone ;
 } @PACKAGE@.so.0.1;
+
+@PACKAGE@.so.0.3
+{
+	global:
+		src_new_double ;
+		src_process_double ;
+		src_simple_double ;
+} @PACKAGE@.so.0.2;

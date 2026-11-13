@@ -28,6 +28,10 @@ The API allows three methods for accessing the capabilities of the library:
   calls a user supplied callback function to obtain its input. This interface is
   particularly well suited to applications where the output sample rate is
   varied with time.
+- A [double precision interface](api_double.md) which mirrors the simple and
+  full interfaces above but processes **double** data with double precision
+  filter coefficients and accumulation, for applications that need a full
+  double precision chain.
 
 **NB :** All three access methods are able to process multi channel interleaved
 data.
@@ -39,7 +43,8 @@ The parts of the API which are common to all three interfaces are:
 - The [SRC_DATA](api_misc.md#src_data) struct.
 
 All three versions of the API are restricted to operating on buffers of ISO C
-Standard **float** data. However, there are two [auxiliary functions](api_misc.md#auxiliary-functions)
+Standard **float** data (the [double precision interface](api_double.md)
+operates on **double** data). However, there are two [auxiliary functions](api_misc.md#auxiliary-functions)
 for converting arrays of float data to and from short data.
 
 **Note:** The **tests/** and **examples/** directories of the source code

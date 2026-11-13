@@ -28,3 +28,7 @@ src_int_to_float_array		@80
 src_float_to_int_array		@81
 
 src_get_channels		@90
+
+src_new_double			@100
+src_process_double		@101
+src_simple_double		@102
