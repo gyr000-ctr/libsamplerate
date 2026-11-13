@@ -35,7 +35,7 @@ typedef struct
 	bool	dirty ;
 	long	in_count, in_used ;
 	long	out_count, out_gen ;
-	float	*last_value ;
+	SRC_SAMPLE_T	*last_value ;
 } LINEAR_DATA ;
 
 static SRC_STATE_VT linear_state_vt =
@@ -67,7 +67,7 @@ linear_vari_process (SRC_STATE *state, SRC_DATA *data)
 	if (!priv->dirty)
 	{	/* If we have just been reset, set the last_value data. */
 		for (ch = 0 ; ch < state->channels ; ch++)
-			priv->last_value [ch] = data->data_in [ch] ;
+			priv->last_value [ch] = src_from_api_sample (data->data_in [ch]) ;
 		priv->dirty = true ;
 		} ;
 
@@ -92,8 +92,9 @@ linear_vari_process (SRC_STATE *state, SRC_DATA *data)
 			src_ratio = state->last_ratio + priv->out_gen * (data->src_ratio - state->last_ratio) / priv->out_count ;
 
 		for (ch = 0 ; ch < state->channels ; ch++)
-		{	data->data_out [priv->out_gen] = (float) (priv->last_value [ch] + input_index *
-										((double) data->data_in [ch] - priv->last_value [ch])) ;
+		{	src_store_api_sample (data->data_out + priv->out_gen,
+					priv->last_value [ch] + input_index *
+					((SRC_SAMPLE_T) data->data_in [ch] - priv->last_value [ch])) ;
 			priv->out_gen ++ ;
 			} ;
 
@@ -119,8 +120,10 @@ linear_vari_process (SRC_STATE *state, SRC_DATA *data)
 #endif
 
 		for (ch = 0 ; ch < state->channels ; ch++)
-		{	data->data_out [priv->out_gen] = (float) (data->data_in [priv->in_used - state->channels + ch] + input_index *
-						((double) data->data_in [priv->in_used + ch] - data->data_in [priv->in_used - state->channels + ch])) ;
+		{	src_store_api_sample (data->data_out + priv->out_gen,
+					(SRC_SAMPLE_T) data->data_in [priv->in_used - state->channels + ch] + input_index *
+					((SRC_SAMPLE_T) data->data_in [priv->in_used + ch] -
+					(SRC_SAMPLE_T) data->data_in [priv->in_used - state->channels + ch])) ;
 			priv->out_gen ++ ;
 			} ;
 
@@ -141,7 +144,7 @@ linear_vari_process (SRC_STATE *state, SRC_DATA *data)
 
 	if (priv->in_used > 0)
 		for (ch = 0 ; ch < state->channels ; ch++)
-			priv->last_value [ch] = data->data_in [priv->in_used - state->channels + ch] ;
+			priv->last_value [ch] = src_from_api_sample (data->data_in [priv->in_used - state->channels + ch]) ;
 
 	/* Save current ratio rather then target ratio. */
 	state->last_ratio = src_ratio ;
@@ -182,7 +185,7 @@ linear_data_new (int channels)
 	if (priv)
 	{
 		priv->linear_magic_marker = LINEAR_MAGIC_MARKER ;
-		priv->last_value = (float *) calloc (channels, sizeof (float)) ;
+		priv->last_value = (SRC_SAMPLE_T *) calloc (channels, sizeof (priv->last_value [0])) ;
 		if (!priv->last_value)
 		{
 			free (priv) ;
@@ -265,14 +268,14 @@ linear_copy (SRC_STATE *state)
 	}
 
 	memcpy (to_priv, from_priv, sizeof (LINEAR_DATA)) ;
-	to_priv->last_value = (float *) malloc (sizeof (float) * state->channels) ;
+	to_priv->last_value = (SRC_SAMPLE_T *) malloc (sizeof (to_priv->last_value [0]) * state->channels) ;
 	if (!to_priv->last_value)
 	{
 		free (to) ;
 		free (to_priv) ;
 		return NULL ;
 	}
-	memcpy (to_priv->last_value, from_priv->last_value, sizeof (float) * state->channels) ;
+	memcpy (to_priv->last_value, from_priv->last_value, sizeof (to_priv->last_value [0]) * state->channels) ;
 
 	to->private_data = to_priv ;
 
