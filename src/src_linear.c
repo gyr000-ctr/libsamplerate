@@ -94,7 +94,7 @@ linear_vari_process (SRC_STATE *state, SRC_DATA *data)
 		for (ch = 0 ; ch < state->channels ; ch++)
 		{	src_store_api_sample (data->data_out + priv->out_gen,
 					priv->last_value [ch] + input_index *
-					((SRC_SAMPLE_T) data->data_in [ch] - priv->last_value [ch])) ;
+					(src_widen_api_sample (data->data_in [ch]) - priv->last_value [ch])) ;
 			priv->out_gen ++ ;
 			} ;
 
@@ -121,9 +121,9 @@ linear_vari_process (SRC_STATE *state, SRC_DATA *data)
 
 		for (ch = 0 ; ch < state->channels ; ch++)
 		{	src_store_api_sample (data->data_out + priv->out_gen,
-					(SRC_SAMPLE_T) data->data_in [priv->in_used - state->channels + ch] + input_index *
-					((SRC_SAMPLE_T) data->data_in [priv->in_used + ch] -
-					(SRC_SAMPLE_T) data->data_in [priv->in_used - state->channels + ch])) ;
+					src_widen_api_sample (data->data_in [priv->in_used - state->channels + ch]) + input_index *
+					(src_widen_api_sample (data->data_in [priv->in_used + ch]) -
+					src_widen_api_sample (data->data_in [priv->in_used - state->channels + ch]))) ;
 			priv->out_gen ++ ;
 			} ;
 

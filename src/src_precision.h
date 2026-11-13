@@ -45,6 +45,18 @@ src_store_api_sample (float *dst, SRC_SAMPLE_T x)
 } /* src_store_api_sample */
 
 /*
+** Widen an API sample for arithmetic against an internal precision value.
+** In the float build this is a plain double promotion (identical to the
+** historical converter code, so generated code is unchanged); in the double
+** build it keeps the operand in the internal double working precision.
+*/
+static inline SRC_SAMPLE_T
+src_widen_api_sample (float x)
+{
+	return (SRC_SAMPLE_T) (double) x ;
+} /* src_widen_api_sample */
+
+/*
 ** Bulk copy of API (float) samples into an internal precision buffer.
 ** In double precision builds each element has to be widened, so this
 ** cannot be a plain memcpy.
@@ -73,6 +85,16 @@ src_store_api_sample (float *dst, SRC_SAMPLE_T x)
 {
 	*dst = x ;
 } /* src_store_api_sample */
+
+/*
+** Float build : return the double-promoted operand so the surrounding
+** arithmetic runs in double exactly as the historical converter code did.
+*/
+static inline double
+src_widen_api_sample (float x)
+{
+	return (double) x ;
+} /* src_widen_api_sample */
 
 static inline void
 src_copy_api_to_internal (SRC_SAMPLE_T *dst, const float *src, long count)
