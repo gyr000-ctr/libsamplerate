@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>libsamplerate precision paths — verification</title>
+<style>
+  .viz-root {
+    --surface-1: #fcfcfb;
+    --surface-2: #f2f1ee;
+    --text-primary: #1c1c1a;
+    --text-secondary: #55544e;
+    --text-muted: #82807a;
+    --grid: #e3e1dc;
+    --series-1: #2a78d6;   /* double precision path */
+    --series-2: #eb6834;   /* float precision path  */
+    background: var(--surface-1);
+    color: var(--text-primary);
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px 28px 48px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .viz-root {
+      color-scheme: dark;
+      --surface-1: #1a1a19;
+      --surface-2: #242422;
+      --text-primary: #f0efec;
+      --text-secondary: #c3c2b7;
+      --text-muted: #8f8d85;
+      --grid: #33332f;
+      --series-1: #3987e5;
+      --series-2: #d95926;
+    }
+  }
+  h1 { font-size: 21px; font-weight: 650; margin: 0 0 4px; }
+  .sub { color: var(--text-secondary); font-size: 13.5px; margin: 0 0 26px; }
+  h2 { font-size: 15px; font-weight: 600; margin: 30px 0 6px; }
+  .chart-card {
+    background: var(--surface-2);
+    border: 1px solid var(--grid);
+    border-radius: 10px;
+    padding: 20px 18px 12px;
+  }
+  svg { width: 100%; height: auto; display: block; }
+  .axis-label { fill: var(--text-muted); font-size: 11.5px; }
+  .tick-label { fill: var(--text-secondary); font-size: 11px; }
+  .cat-label { fill: var(--text-primary); font-size: 12.5px; font-weight: 550; }
+  .bar-value { fill: var(--text-secondary); font-size: 11px; font-weight: 600; }
+  .grid-line { stroke: var(--grid); stroke-width: 1; }
+  .legend { display: flex; gap: 22px; margin: 10px 4px 0; font-size: 12.5px; color: var(--text-secondary); }
+  .legend .swatch { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 7px; vertical-align: -1px; }
+  .bar { cursor: pointer; transition: opacity .12s ease; }
+  .bar:hover { opacity: .82; }
+  #tooltip {
+    position: fixed; pointer-events: none; opacity: 0; transition: opacity .1s ease;
+    background: var(--text-primary); color: var(--surface-1);
+    font-size: 12px; line-height: 1.45; padding: 8px 11px; border-radius: 7px;
+    max-width: 260px; z-index: 10; box-shadow: 0 4px 16px rgba(0,0,0,.25);
+  }
+  #tooltip .tt-title { font-weight: 650; margin-bottom: 2px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 12.5px; }
+  th, td { text-align: right; padding: 8px 10px; border-bottom: 1px solid var(--grid); }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--text-muted); font-weight: 600; }
+  td { color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+  .note { color: var(--text-muted); font-size: 11.5px; margin-top: 14px; line-height: 1.5; }
+  .stat-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 22px; }
+  .stat {
+    flex: 1 1 180px; background: var(--surface-2); border: 1px solid var(--grid);
+    border-radius: 10px; padding: 14px 16px;
+  }
+  .stat .num { font-size: 24px; font-weight: 700; margin: 4px 0 2px; font-variant-numeric: tabular-nums; }
+  .stat .lbl { color: var(--text-muted); font-size: 11.5px; }
+</style>
+</head>
+<body>
+<div class="viz-root" data-palette="#2a78d6,#eb6834">
+  <h1>libsamplerate: double vs float internal precision paths</h1>
+  <p class="sub">Maximum output error against an independent double-precision reference, by converter and quality tier.
+    75 cases (5 converters × 5 ratios × 1–3 channels), chunked streaming through the public API. Errors are counted in binary32 ULP of each output sample.</p>
+
+  <div class="chart-card">
+    <svg id="chart" viewBox="0 0 880 420" role="img" aria-label="Grouped bar chart of maximum error in float ULP for the double and float precision paths"></svg>
+    <div class="legend">
+      <span><span class="swatch" style="background:var(--series-1)"></span>double precision path (LIBSAMPLERATE_DOUBLE_PRECISION=ON)</span>
+      <span><span class="swatch" style="background:var(--series-2)"></span>float precision path (default build)</span>
+    </div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat"><div class="num">0 ULP</div><div class="lbl">double path max error vs reference — all 75 cases bit-exact</div></div>
+    <div class="stat"><div class="num">10,176</div><div class="lbl">worst float path error vs reference (SINC_MEDIUM, ratio 0.7)</div></div>
+    <div class="stat"><div class="num">82.0%</div><div class="lbl">of samples bit-identical between the two builds</div></div>
+  </div>
+
+  <h2>Detailed table (per converter, worst case across ratios and channels)</h2>
+  <table>
+    <thead>
+      <tr><th>Converter</th><th>max |double − float|</th><th>max relative diff</th><th>min diff SNR (dB)</th>
+          <th>double vs ref (ULP)</th><th>float vs ref (ULP)</th></tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+  <p class="note">Reference: independent pure-double reimplementation of each converter (linear, zero-order-hold, sinc polyphase),
+    parsing the project's own coefficient tables. Library outputs are rounded to binary32 at the API boundary, so the
+    reference is rounded the same way before comparison. ZOH and LINEAR produce bit-identical output in both builds.
+    Sinc tiers differ only because the default build stores coefficients and the delay line in binary32; the double build
+    keeps coefficients, delay line and accumulation all in binary64 while sharing the identical control logic and quality tiers.</p>
+</div>
+<div id="tooltip"></div>
+
+<script>
+const rows = [
+  { converter: "SINC_BEST",    maxAbs: 5.960e-08, maxRel: 6.852e-05, snr: 148.10, ulpDouble: 0, ulpFloat: 627 },
+  { converter: "SINC_MEDIUM",  maxAbs: 5.960e-08, maxRel: 7.139e-04, snr: 145.43, ulpDouble: 0, ulpFloat: 10176 },
+  { converter: "SINC_FASTEST", maxAbs: 5.960e-08, maxRel: 1.823e-04, snr: 146.16, ulpDouble: 0, ulpFloat: 2790 },
+  { converter: "ZOH",          maxAbs: 0,         maxRel: 0,         snr: null,   ulpDouble: 0, ulpFloat: 0 },
+  { converter: "LINEAR",       maxAbs: 0,         maxRel: 0,         snr: null,   ulpDouble: 0, ulpFloat: 0 },
+];
+
+const W = 880, H = 420, M = { top: 24, right: 24, bottom: 64, left: 64 };
+const plotW = W - M.left - M.right, plotH = H - M.top - M.bottom;
+const svg = document.getElementById("chart");
+const NS = "http://www.w3.org/2000/svg";
+const css = getComputedStyle(document.querySelector(".viz-root"));
+const c1 = css.getPropertyValue("--series-1").trim();
+const c2 = css.getPropertyValue("--series-2").trim();
+const maxVal = Math.max(...rows.map(r => Math.max(r.ulpDouble, r.ulpFloat)));
+const niceMax = 11000;
+const groupW = plotW / rows.length;
+const barW = 46, gap = 6;
+
+function el(name, attrs) {
+  const e = document.createElementNS(NS, name);
+  for (const [k, v] of Object.entries(attrs || {})) e.setAttribute(k, v);
+  return e;
+}
+const y = v => M.top + plotH - (v / niceMax) * plotH;
+
+// grid + y ticks
+[0, 2500, 5000, 7500, 10000].forEach(t => {
+  svg.appendChild(el("line", { class: "grid-line", x1: M.left, x2: M.left + plotW, y1: y(t), y2: y(t) }));
+  const lbl = el("text", { class: "tick-label", x: M.left - 9, y: y(t) + 4, "text-anchor": "end" });
+  lbl.textContent = t.toLocaleString();
+  svg.appendChild(lbl);
+});
+const yTitle = el("text", { class: "axis-label", x: 18, y: M.top + plotH / 2,
+  transform: `rotate(-90 18 ${M.top + plotH / 2})`, "text-anchor": "middle" });
+yTitle.textContent = "max error vs reference (binary32 ULP)";
+svg.appendChild(yTitle);
+
+const tooltip = document.getElementById("tooltip");
+function showTip(evt, r, seriesName, val) {
+  tooltip.innerHTML = `<div class="tt-title">${r.converter} — ${seriesName}</div>` +
+    `max error vs reference: <b>${val.toLocaleString()} ULP</b><br>` +
+    `max |double − float|: ${r.maxAbs === 0 ? "0 (bit-identical)" : r.maxAbs.toExponential(3)}`;
+  tooltip.style.opacity = 1;
+  moveTip(evt);
+}
+function moveTip(evt) {
+  tooltip.style.left = (evt.clientX + 14) + "px";
+  tooltip.style.top = (evt.clientY + 14) + "px";
+}
+function hideTip() { tooltip.style.opacity = 0; }
+
+rows.forEach((r, i) => {
+  const gx = M.left + i * groupW + groupW / 2;
+  const x1 = gx - barW - gap / 2, x2 = gx + gap / 2;
+  const bars = [
+    { x: x1, val: r.ulpDouble, color: c1, name: "double path" },
+    { x: x2, val: r.ulpFloat,  color: c2, name: "float path" },
+  ];
+  bars.forEach(b => {
+    const h = Math.max(plotH - (y(b.val) - M.top), b.val === 0 ? 2 : 0);
+    const rect = el("rect", {
+      class: "bar", x: b.x, y: y(b.val) - (b.val === 0 ? 2 : 0),
+      width: barW, height: h, rx: 4, fill: b.color,
+    });
+    rect.addEventListener("mousemove", e => { moveTip(e); });
+    rect.addEventListener("mouseenter", e => showTip(e, r, b.name, b.val));
+    rect.addEventListener("mouseleave", hideTip);
+    svg.appendChild(rect);
+    const vl = el("text", { class: "bar-value", x: b.x + barW / 2,
+      y: y(b.val) - (b.val === 0 ? 6 : 6), "text-anchor": "middle" });
+    vl.textContent = b.val.toLocaleString();
+    svg.appendChild(vl);
+  });
+  const cat = el("text", { class: "cat-label", x: gx, y: M.top + plotH + 24, "text-anchor": "middle" });
+  cat.textContent = r.converter;
+  svg.appendChild(cat);
+});
+
+// baseline
+svg.appendChild(el("line", { class: "grid-line", x1: M.left, x2: M.left + plotW, y1: y(0), y2: y(0) }));
+
+const fmtSci = v => v === 0 ? "0" : v.toExponential(2);
+document.getElementById("tbody").innerHTML = rows.map(r => `
+  <tr>
+    <td>${r.converter}</td>
+    <td>${fmtSci(r.maxAbs)}</td>
+    <td>${fmtSci(r.maxRel)}</td>
+    <td>${r.snr === null ? "identical" : r.snr.toFixed(2)}</td>
+    <td>${r.ulpDouble.toLocaleString()}</td>
+    <td>${r.ulpFloat.toLocaleString()}</td>
+  </tr>`).join("");
+</script>
+</body>
+</html>

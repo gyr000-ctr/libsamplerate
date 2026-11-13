@@ -1,0 +1,2946 @@
+{
+  "cases": [
+    {
+      "case": {
+        "converter": "SINC_BEST",
+        "conv_id": 0,
+        "ratio": 0.5,
+        "channels": 1,
+        "out_frames": 512
+      },
+      "float_vs_double": {
+        "samples": 512,
+        "exact_bit_matches": 413,
+        "exact_match_pct": 80.6640625,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 9.733419660354124e-06,
+        "max_diff_ulp_f32": 108.0,
+        "rms_diff": 7.643415983768633e-09,
+        "diff_snr_db": 152.23883014160046
+      },
+      "double_vs_reference": {
+        "samples": 512,
+        "exact_bit_matches": 512,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 512,
+        "exact_bit_matches": 413,
+        "exact_match_pct": 80.6640625,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 9.733419660354124e-06,
+        "max_diff_ulp_f32": 108.0,
+        "rms_diff": 7.643415983768633e-09,
+        "diff_snr_db": 152.23883014160046
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_BEST",
+        "conv_id": 0,
+        "ratio": 0.5,
+        "channels": 2,
+        "out_frames": 512
+      },
+      "float_vs_double": {
+        "samples": 1024,
+        "exact_bit_matches": 842,
+        "exact_match_pct": 82.2265625,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.1335770523995993e-05,
+        "max_diff_ulp_f32": 108.0,
+        "rms_diff": 8.038696093976586e-09,
+        "diff_snr_db": 151.80630170666709
+      },
+      "double_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 1024,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 842,
+        "exact_match_pct": 82.2265625,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.1335770523995993e-05,
+        "max_diff_ulp_f32": 108.0,
+        "rms_diff": 8.038696093976586e-09,
+        "diff_snr_db": 151.80630170666709
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_BEST",
+        "conv_id": 0,
+        "ratio": 0.5,
+        "channels": 3,
+        "out_frames": 512
+      },
+      "float_vs_double": {
+        "samples": 1536,
+        "exact_bit_matches": 1265,
+        "exact_match_pct": 82.35677083333333,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.1335770523995993e-05,
+        "max_diff_ulp_f32": 108.0,
+        "rms_diff": 7.688609434866348e-09,
+        "diff_snr_db": 152.17297500015877
+      },
+      "double_vs_reference": {
+        "samples": 1536,
+        "exact_bit_matches": 1536,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1536,
+        "exact_bit_matches": 1265,
+        "exact_match_pct": 82.35677083333333,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.1335770523995993e-05,
+        "max_diff_ulp_f32": 108.0,
+        "rms_diff": 7.688609434866348e-09,
+        "diff_snr_db": 152.17297500015877
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_BEST",
+        "conv_id": 0,
+        "ratio": 0.7,
+        "channels": 1,
+        "out_frames": 716
+      },
+      "float_vs_double": {
+        "samples": 716,
+        "exact_bit_matches": 576,
+        "exact_match_pct": 80.44692737430168,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 6.851842724965831e-05,
+        "max_diff_ulp_f32": 627.0,
+        "rms_diff": 8.320612526778048e-09,
+        "diff_snr_db": 151.51828982165978
+      },
+      "double_vs_reference": {
+        "samples": 716,
+        "exact_bit_matches": 716,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 716,
+        "exact_bit_matches": 576,
+        "exact_match_pct": 80.44692737430168,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 6.851842724965831e-05,
+        "max_diff_ulp_f32": 627.0,
+        "rms_diff": 8.320612526778048e-09,
+        "diff_snr_db": 151.51828982165978
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_BEST",
+        "conv_id": 0,
+        "ratio": 0.7,
+        "channels": 2,
+        "out_frames": 717
+      },
+      "float_vs_double": {
+        "samples": 1434,
+        "exact_bit_matches": 1161,
+        "exact_match_pct": 80.9623430962343,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 6.851842724965831e-05,
+        "max_diff_ulp_f32": 627.0,
+        "rms_diff": 7.989566961070166e-09,
+        "diff_snr_db": 151.87744424873472
+      },
+      "double_vs_reference": {
+        "samples": 1434,
+        "exact_bit_matches": 1434,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1434,
+        "exact_bit_matches": 1161,
+        "exact_match_pct": 80.9623430962343,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 6.851842724965831e-05,
+        "max_diff_ulp_f32": 627.0,
+        "rms_diff": 7.989566961070166e-09,
+        "diff_snr_db": 151.87744424873472
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_BEST",
+        "conv_id": 0,
+        "ratio": 0.7,
+        "channels": 3,
+        "out_frames": 717
+      },
+      "float_vs_double": {
+        "samples": 2151,
+        "exact_bit_matches": 1746,
+        "exact_match_pct": 81.17154811715481,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 6.851842724965831e-05,
+        "max_diff_ulp_f32": 627.0,
+        "rms_diff": 7.723159832741516e-09,
+        "diff_snr_db": 152.1519208348367
+      },
+      "double_vs_reference": {
+        "samples": 2151,
+        "exact_bit_matches": 2151,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 2151,
+        "exact_bit_matches": 1746,
+        "exact_match_pct": 81.17154811715481,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 6.851842724965831e-05,
+        "max_diff_ulp_f32": 627.0,
+        "rms_diff": 7.723159832741516e-09,
+        "diff_snr_db": 152.1519208348367
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_BEST",
+        "conv_id": 0,
+        "ratio": 1.0,
+        "channels": 1,
+        "out_frames": 1024
+      },
+      "float_vs_double": {
+        "samples": 1024,
+        "exact_bit_matches": 743,
+        "exact_match_pct": 72.55859375,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 4.19794015472488e-06,
+        "max_diff_ulp_f32": 45.0,
+        "rms_diff": 1.2369648953228738e-08,
+        "diff_snr_db": 148.09530345819485
+      },
+      "double_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 1024,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 743,
+        "exact_match_pct": 72.55859375,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 4.19794015472488e-06,
+        "max_diff_ulp_f32": 45.0,
+        "rms_diff": 1.2369648953228738e-08,
+        "diff_snr_db": 148.09530345819485
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_BEST",
+        "conv_id": 0,
+        "ratio": 1.0,
+        "channels": 2,
+        "out_frames": 1024
+      },
+      "float_vs_double": {
+        "samples": 2048,
+        "exact_bit_matches": 1519,
+        "exact_match_pct": 74.169921875,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 5.368301672412695e-06,
+        "max_diff_ulp_f32": 63.0,
+        "rms_diff": 1.166592377366038e-08,
+        "diff_snr_db": 148.60926495559434
+      },
+      "double_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 2048,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 1519,
+        "exact_match_pct": 74.169921875,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 5.368301672412695e-06,
+        "max_diff_ulp_f32": 63.0,
+        "rms_diff": 1.166592377366038e-08,
+        "diff_snr_db": 148.60926495559434
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_BEST",
+        "conv_id": 0,
+        "ratio": 1.0,
+        "channels": 3,
+        "out_frames": 1024
+      },
+      "float_vs_double": {
+        "samples": 3072,
+        "exact_bit_matches": 2272,
+        "exact_match_pct": 73.95833333333333,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.0916891203935011e-05,
+        "max_diff_ulp_f32": 124.0,
+        "rms_diff": 1.1812691129358988e-08,
+        "diff_snr_db": 148.48090495160955
+      },
+      "double_vs_reference": {
+        "samples": 3072,
+        "exact_bit_matches": 3072,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 3072,
+        "exact_bit_matches": 2272,
+        "exact_match_pct": 73.95833333333333,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.0916891203935011e-05,
+        "max_diff_ulp_f32": 124.0,
+        "rms_diff": 1.1812691129358988e-08,
+        "diff_snr_db": 148.48090495160955
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_BEST",
+        "conv_id": 0,
+        "ratio": 1.5,
+        "channels": 1,
+        "out_frames": 1536
+      },
+      "float_vs_double": {
+        "samples": 1536,
+        "exact_bit_matches": 1131,
+        "exact_match_pct": 73.6328125,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.8193055926638907e-05,
+        "max_diff_ulp_f32": 261.0,
+        "rms_diff": 9.40404067495017e-09,
+        "diff_snr_db": 150.47610213357535
+      },
+      "double_vs_reference": {
+        "samples": 1536,
+        "exact_bit_matches": 1536,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1536,
+        "exact_bit_matches": 1131,
+        "exact_match_pct": 73.6328125,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.8193055926638907e-05,
+        "max_diff_ulp_f32": 261.0,
+        "rms_diff": 9.40404067495017e-09,
+        "diff_snr_db": 150.47610213357535
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_BEST",
+        "conv_id": 0,
+        "ratio": 1.5,
+        "channels": 2,
+        "out_frames": 1537
+      },
+      "float_vs_double": {
+        "samples": 3074,
+        "exact_bit_matches": 2276,
+        "exact_match_pct": 74.04033832140533,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.8193055926638907e-05,
+        "max_diff_ulp_f32": 261.0,
+        "rms_diff": 9.316171777492363e-09,
+        "diff_snr_db": 150.55921299940994
+      },
+      "double_vs_reference": {
+        "samples": 3074,
+        "exact_bit_matches": 3074,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 3074,
+        "exact_bit_matches": 2276,
+        "exact_match_pct": 74.04033832140533,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.8193055926638907e-05,
+        "max_diff_ulp_f32": 261.0,
+        "rms_diff": 9.316171777492363e-09,
+        "diff_snr_db": 150.55921299940994
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_BEST",
+        "conv_id": 0,
+        "ratio": 1.5,
+        "channels": 3,
+        "out_frames": 1537
+      },
+      "float_vs_double": {
+        "samples": 4611,
+        "exact_bit_matches": 3409,
+        "exact_match_pct": 73.93190197354153,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.8424872570017642e-05,
+        "max_diff_ulp_f32": 289.0,
+        "rms_diff": 9.500581115025925e-09,
+        "diff_snr_db": 150.36907593266062
+      },
+      "double_vs_reference": {
+        "samples": 4611,
+        "exact_bit_matches": 4611,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 4611,
+        "exact_bit_matches": 3409,
+        "exact_match_pct": 73.93190197354153,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.8424872570017642e-05,
+        "max_diff_ulp_f32": 289.0,
+        "rms_diff": 9.500581115025925e-09,
+        "diff_snr_db": 150.36907593266062
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_BEST",
+        "conv_id": 0,
+        "ratio": 2.0,
+        "channels": 1,
+        "out_frames": 2048
+      },
+      "float_vs_double": {
+        "samples": 2048,
+        "exact_bit_matches": 1572,
+        "exact_match_pct": 76.7578125,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 6.383250880246151e-06,
+        "max_diff_ulp_f32": 80.0,
+        "rms_diff": 1.1048108817590428e-08,
+        "diff_snr_db": 149.0766165040255
+      },
+      "double_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 2048,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 1572,
+        "exact_match_pct": 76.7578125,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 6.383250880246151e-06,
+        "max_diff_ulp_f32": 80.0,
+        "rms_diff": 1.1048108817590428e-08,
+        "diff_snr_db": 149.0766165040255
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_BEST",
+        "conv_id": 0,
+        "ratio": 2.0,
+        "channels": 2,
+        "out_frames": 2048
+      },
+      "float_vs_double": {
+        "samples": 4096,
+        "exact_bit_matches": 3173,
+        "exact_match_pct": 77.4658203125,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 6.383250880246151e-06,
+        "max_diff_ulp_f32": 80.0,
+        "rms_diff": 1.0806440539430223e-08,
+        "diff_snr_db": 149.27255757825682
+      },
+      "double_vs_reference": {
+        "samples": 4096,
+        "exact_bit_matches": 4096,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 4096,
+        "exact_bit_matches": 3173,
+        "exact_match_pct": 77.4658203125,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 6.383250880246151e-06,
+        "max_diff_ulp_f32": 80.0,
+        "rms_diff": 1.0806440539430223e-08,
+        "diff_snr_db": 149.27255757825682
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_BEST",
+        "conv_id": 0,
+        "ratio": 2.0,
+        "channels": 3,
+        "out_frames": 2048
+      },
+      "float_vs_double": {
+        "samples": 6144,
+        "exact_bit_matches": 4726,
+        "exact_match_pct": 76.92057291666667,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.0916891203935011e-05,
+        "max_diff_ulp_f32": 124.0,
+        "rms_diff": 1.0938649864129644e-08,
+        "diff_snr_db": 149.14701635703284
+      },
+      "double_vs_reference": {
+        "samples": 6144,
+        "exact_bit_matches": 6144,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 6144,
+        "exact_bit_matches": 4726,
+        "exact_match_pct": 76.92057291666667,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.0916891203935011e-05,
+        "max_diff_ulp_f32": 124.0,
+        "rms_diff": 1.0938649864129644e-08,
+        "diff_snr_db": 149.14701635703284
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_MEDIUM",
+        "conv_id": 1,
+        "ratio": 0.5,
+        "channels": 1,
+        "out_frames": 512
+      },
+      "float_vs_double": {
+        "samples": 512,
+        "exact_bit_matches": 390,
+        "exact_match_pct": 76.171875,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 3.860653976533261e-06,
+        "max_diff_ulp_f32": 55.0,
+        "rms_diff": 7.129406853233005e-09,
+        "diff_snr_db": 152.2193308529256
+      },
+      "double_vs_reference": {
+        "samples": 512,
+        "exact_bit_matches": 512,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 512,
+        "exact_bit_matches": 390,
+        "exact_match_pct": 76.171875,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 3.860653976533261e-06,
+        "max_diff_ulp_f32": 55.0,
+        "rms_diff": 7.129406853233005e-09,
+        "diff_snr_db": 152.2193308529256
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_MEDIUM",
+        "conv_id": 1,
+        "ratio": 0.5,
+        "channels": 2,
+        "out_frames": 512
+      },
+      "float_vs_double": {
+        "samples": 1024,
+        "exact_bit_matches": 799,
+        "exact_match_pct": 78.02734375,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 3.860653976533261e-06,
+        "max_diff_ulp_f32": 55.0,
+        "rms_diff": 6.43067938946248e-09,
+        "diff_snr_db": 153.11425984841827
+      },
+      "double_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 1024,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 799,
+        "exact_match_pct": 78.02734375,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 3.860653976533261e-06,
+        "max_diff_ulp_f32": 55.0,
+        "rms_diff": 6.43067938946248e-09,
+        "diff_snr_db": 153.11425984841827
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_MEDIUM",
+        "conv_id": 1,
+        "ratio": 0.5,
+        "channels": 3,
+        "out_frames": 512
+      },
+      "float_vs_double": {
+        "samples": 1536,
+        "exact_bit_matches": 1185,
+        "exact_match_pct": 77.1484375,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 3.860653976533261e-06,
+        "max_diff_ulp_f32": 55.0,
+        "rms_diff": 6.9948664568371296e-09,
+        "diff_snr_db": 152.35987985368106
+      },
+      "double_vs_reference": {
+        "samples": 1536,
+        "exact_bit_matches": 1536,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1536,
+        "exact_bit_matches": 1185,
+        "exact_match_pct": 77.1484375,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 3.860653976533261e-06,
+        "max_diff_ulp_f32": 55.0,
+        "rms_diff": 6.9948664568371296e-09,
+        "diff_snr_db": 152.35987985368106
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_MEDIUM",
+        "conv_id": 1,
+        "ratio": 0.7,
+        "channels": 1,
+        "out_frames": 716
+      },
+      "float_vs_double": {
+        "samples": 716,
+        "exact_bit_matches": 546,
+        "exact_match_pct": 76.25698324022346,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.0004712212536242185,
+        "max_diff_ulp_f32": 5579.0,
+        "rms_diff": 7.4588922278855e-09,
+        "diff_snr_db": 152.46561424234324
+      },
+      "double_vs_reference": {
+        "samples": 716,
+        "exact_bit_matches": 716,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 716,
+        "exact_bit_matches": 546,
+        "exact_match_pct": 76.25698324022346,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.0004712212536242185,
+        "max_diff_ulp_f32": 5579.0,
+        "rms_diff": 7.4588922278855e-09,
+        "diff_snr_db": 152.46561424234324
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_MEDIUM",
+        "conv_id": 1,
+        "ratio": 0.7,
+        "channels": 2,
+        "out_frames": 717
+      },
+      "float_vs_double": {
+        "samples": 1434,
+        "exact_bit_matches": 1096,
+        "exact_match_pct": 76.42956764295677,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.0004712212536242185,
+        "max_diff_ulp_f32": 5579.0,
+        "rms_diff": 7.810255586755654e-09,
+        "diff_snr_db": 152.07198682074312
+      },
+      "double_vs_reference": {
+        "samples": 1434,
+        "exact_bit_matches": 1434,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1434,
+        "exact_bit_matches": 1096,
+        "exact_match_pct": 76.42956764295677,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.0004712212536242185,
+        "max_diff_ulp_f32": 5579.0,
+        "rms_diff": 7.810255586755654e-09,
+        "diff_snr_db": 152.07198682074312
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_MEDIUM",
+        "conv_id": 1,
+        "ratio": 0.7,
+        "channels": 3,
+        "out_frames": 717
+      },
+      "float_vs_double": {
+        "samples": 2151,
+        "exact_bit_matches": 1641,
+        "exact_match_pct": 76.29009762900976,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.0004712212536242185,
+        "max_diff_ulp_f32": 5579.0,
+        "rms_diff": 7.59938310957662e-09,
+        "diff_snr_db": 152.28956241950596
+      },
+      "double_vs_reference": {
+        "samples": 2151,
+        "exact_bit_matches": 2151,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 2151,
+        "exact_bit_matches": 1641,
+        "exact_match_pct": 76.29009762900976,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.0004712212536242185,
+        "max_diff_ulp_f32": 5579.0,
+        "rms_diff": 7.59938310957662e-09,
+        "diff_snr_db": 152.28956241950596
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_MEDIUM",
+        "conv_id": 1,
+        "ratio": 1.0,
+        "channels": 1,
+        "out_frames": 1024
+      },
+      "float_vs_double": {
+        "samples": 1024,
+        "exact_bit_matches": 664,
+        "exact_match_pct": 64.84375,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.1457989451842978e-05,
+        "max_diff_ulp_f32": 101.0,
+        "rms_diff": 1.389197904428414e-08,
+        "diff_snr_db": 147.0836674110223
+      },
+      "double_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 1024,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 664,
+        "exact_match_pct": 64.84375,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.1457989451842978e-05,
+        "max_diff_ulp_f32": 101.0,
+        "rms_diff": 1.389197904428414e-08,
+        "diff_snr_db": 147.0836674110223
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_MEDIUM",
+        "conv_id": 1,
+        "ratio": 1.0,
+        "channels": 2,
+        "out_frames": 1024
+      },
+      "float_vs_double": {
+        "samples": 2048,
+        "exact_bit_matches": 1312,
+        "exact_match_pct": 64.0625,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.1992246735741188e-05,
+        "max_diff_ulp_f32": 195.0,
+        "rms_diff": 1.4223041422675816e-08,
+        "diff_snr_db": 146.88416465868838
+      },
+      "double_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 2048,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 1312,
+        "exact_match_pct": 64.0625,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.1992246735741188e-05,
+        "max_diff_ulp_f32": 195.0,
+        "rms_diff": 1.4223041422675816e-08,
+        "diff_snr_db": 146.88416465868838
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_MEDIUM",
+        "conv_id": 1,
+        "ratio": 1.0,
+        "channels": 3,
+        "out_frames": 1024
+      },
+      "float_vs_double": {
+        "samples": 3072,
+        "exact_bit_matches": 1982,
+        "exact_match_pct": 64.51822916666667,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.1992246735741188e-05,
+        "max_diff_ulp_f32": 195.0,
+        "rms_diff": 1.4083649406998032e-08,
+        "diff_snr_db": 146.9498663737984
+      },
+      "double_vs_reference": {
+        "samples": 3072,
+        "exact_bit_matches": 3072,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 3072,
+        "exact_bit_matches": 1982,
+        "exact_match_pct": 64.51822916666667,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.1992246735741188e-05,
+        "max_diff_ulp_f32": 195.0,
+        "rms_diff": 1.4083649406998032e-08,
+        "diff_snr_db": 146.9498663737984
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_MEDIUM",
+        "conv_id": 1,
+        "ratio": 1.5,
+        "channels": 1,
+        "out_frames": 1536
+      },
+      "float_vs_double": {
+        "samples": 1536,
+        "exact_bit_matches": 1180,
+        "exact_match_pct": 76.82291666666667,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.714803018946943e-05,
+        "max_diff_ulp_f32": 284.0,
+        "rms_diff": 9.41297182678523e-09,
+        "diff_snr_db": 150.46437523637618
+      },
+      "double_vs_reference": {
+        "samples": 1536,
+        "exact_bit_matches": 1536,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1536,
+        "exact_bit_matches": 1180,
+        "exact_match_pct": 76.82291666666667,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.714803018946943e-05,
+        "max_diff_ulp_f32": 284.0,
+        "rms_diff": 9.41297182678523e-09,
+        "diff_snr_db": 150.46437523637618
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_MEDIUM",
+        "conv_id": 1,
+        "ratio": 1.5,
+        "channels": 2,
+        "out_frames": 1537
+      },
+      "float_vs_double": {
+        "samples": 3074,
+        "exact_bit_matches": 2355,
+        "exact_match_pct": 76.61027976577749,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.0007139244523965825,
+        "max_diff_ulp_f32": 10176.0,
+        "rms_diff": 9.575154212997338e-09,
+        "diff_snr_db": 150.31744505472557
+      },
+      "double_vs_reference": {
+        "samples": 3074,
+        "exact_bit_matches": 3074,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 3074,
+        "exact_bit_matches": 2355,
+        "exact_match_pct": 76.61027976577749,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.0007139244523965825,
+        "max_diff_ulp_f32": 10176.0,
+        "rms_diff": 9.575154212997338e-09,
+        "diff_snr_db": 150.31744505472557
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_MEDIUM",
+        "conv_id": 1,
+        "ratio": 1.5,
+        "channels": 3,
+        "out_frames": 1537
+      },
+      "float_vs_double": {
+        "samples": 4611,
+        "exact_bit_matches": 3558,
+        "exact_match_pct": 77.1633051398829,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.0007139244523965825,
+        "max_diff_ulp_f32": 10176.0,
+        "rms_diff": 9.500446908911835e-09,
+        "diff_snr_db": 150.36553105203882
+      },
+      "double_vs_reference": {
+        "samples": 4611,
+        "exact_bit_matches": 4611,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 4611,
+        "exact_bit_matches": 3558,
+        "exact_match_pct": 77.1633051398829,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.0007139244523965825,
+        "max_diff_ulp_f32": 10176.0,
+        "rms_diff": 9.500446908911835e-09,
+        "diff_snr_db": 150.36553105203882
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_MEDIUM",
+        "conv_id": 1,
+        "ratio": 2.0,
+        "channels": 1,
+        "out_frames": 2048
+      },
+      "float_vs_double": {
+        "samples": 2048,
+        "exact_bit_matches": 1119,
+        "exact_match_pct": 54.638671875,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.1457989451842978e-05,
+        "max_diff_ulp_f32": 142.0,
+        "rms_diff": 1.6797297651248065e-08,
+        "diff_snr_db": 145.43410736830407
+      },
+      "double_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 2048,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 1119,
+        "exact_match_pct": 54.638671875,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.1457989451842978e-05,
+        "max_diff_ulp_f32": 142.0,
+        "rms_diff": 1.6797297651248065e-08,
+        "diff_snr_db": 145.43410736830407
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_MEDIUM",
+        "conv_id": 1,
+        "ratio": 2.0,
+        "channels": 2,
+        "out_frames": 2048
+      },
+      "float_vs_double": {
+        "samples": 4096,
+        "exact_bit_matches": 2221,
+        "exact_match_pct": 54.2236328125,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 3.5228538204475e-05,
+        "max_diff_ulp_f32": 584.0,
+        "rms_diff": 1.6750096694588042e-08,
+        "diff_snr_db": 145.46228756675382
+      },
+      "double_vs_reference": {
+        "samples": 4096,
+        "exact_bit_matches": 4096,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 4096,
+        "exact_bit_matches": 2221,
+        "exact_match_pct": 54.2236328125,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 3.5228538204475e-05,
+        "max_diff_ulp_f32": 584.0,
+        "rms_diff": 1.6750096694588042e-08,
+        "diff_snr_db": 145.46228756675382
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_MEDIUM",
+        "conv_id": 1,
+        "ratio": 2.0,
+        "channels": 3,
+        "out_frames": 2048
+      },
+      "float_vs_double": {
+        "samples": 6144,
+        "exact_bit_matches": 3355,
+        "exact_match_pct": 54.606119791666664,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 3.5228538204475e-05,
+        "max_diff_ulp_f32": 584.0,
+        "rms_diff": 1.668841432786887e-08,
+        "diff_snr_db": 145.47435452465723
+      },
+      "double_vs_reference": {
+        "samples": 6144,
+        "exact_bit_matches": 6144,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 6144,
+        "exact_bit_matches": 3355,
+        "exact_match_pct": 54.606119791666664,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 3.5228538204475e-05,
+        "max_diff_ulp_f32": 584.0,
+        "rms_diff": 1.668841432786887e-08,
+        "diff_snr_db": 145.47435452465723
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_FASTEST",
+        "conv_id": 2,
+        "ratio": 0.5,
+        "channels": 1,
+        "out_frames": 512
+      },
+      "float_vs_double": {
+        "samples": 512,
+        "exact_bit_matches": 364,
+        "exact_match_pct": 71.09375,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.846486213672307e-06,
+        "max_diff_ulp_f32": 18.0,
+        "rms_diff": 7.98814161856405e-09,
+        "diff_snr_db": 150.6451187455175
+      },
+      "double_vs_reference": {
+        "samples": 512,
+        "exact_bit_matches": 512,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 512,
+        "exact_bit_matches": 364,
+        "exact_match_pct": 71.09375,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.846486213672307e-06,
+        "max_diff_ulp_f32": 18.0,
+        "rms_diff": 7.98814161856405e-09,
+        "diff_snr_db": 150.6451187455175
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_FASTEST",
+        "conv_id": 2,
+        "ratio": 0.5,
+        "channels": 2,
+        "out_frames": 512
+      },
+      "float_vs_double": {
+        "samples": 1024,
+        "exact_bit_matches": 713,
+        "exact_match_pct": 69.62890625,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.7088607146537176e-06,
+        "max_diff_ulp_f32": 26.0,
+        "rms_diff": 8.797572290884405e-09,
+        "diff_snr_db": 149.7965733252613
+      },
+      "double_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 1024,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 713,
+        "exact_match_pct": 69.62890625,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.7088607146537176e-06,
+        "max_diff_ulp_f32": 26.0,
+        "rms_diff": 8.797572290884405e-09,
+        "diff_snr_db": 149.7965733252613
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_FASTEST",
+        "conv_id": 2,
+        "ratio": 0.5,
+        "channels": 3,
+        "out_frames": 512
+      },
+      "float_vs_double": {
+        "samples": 1536,
+        "exact_bit_matches": 1064,
+        "exact_match_pct": 69.27083333333333,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.4470207960660879e-05,
+        "max_diff_ulp_f32": 140.0,
+        "rms_diff": 8.511637059981863e-09,
+        "diff_snr_db": 150.05540913203146
+      },
+      "double_vs_reference": {
+        "samples": 1536,
+        "exact_bit_matches": 1536,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1536,
+        "exact_bit_matches": 1064,
+        "exact_match_pct": 69.27083333333333,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.4470207960660879e-05,
+        "max_diff_ulp_f32": 140.0,
+        "rms_diff": 8.511637059981863e-09,
+        "diff_snr_db": 150.05540913203146
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_FASTEST",
+        "conv_id": 2,
+        "ratio": 0.7,
+        "channels": 1,
+        "out_frames": 716
+      },
+      "float_vs_double": {
+        "samples": 716,
+        "exact_bit_matches": 476,
+        "exact_match_pct": 66.4804469273743,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.00018227452738958966,
+        "max_diff_ulp_f32": 2790.0,
+        "rms_diff": 1.1305489476758407e-08,
+        "diff_snr_db": 148.84858377794438
+      },
+      "double_vs_reference": {
+        "samples": 716,
+        "exact_bit_matches": 716,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 716,
+        "exact_bit_matches": 476,
+        "exact_match_pct": 66.4804469273743,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.00018227452738958966,
+        "max_diff_ulp_f32": 2790.0,
+        "rms_diff": 1.1305489476758407e-08,
+        "diff_snr_db": 148.84858377794438
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_FASTEST",
+        "conv_id": 2,
+        "ratio": 0.7,
+        "channels": 2,
+        "out_frames": 717
+      },
+      "float_vs_double": {
+        "samples": 1434,
+        "exact_bit_matches": 974,
+        "exact_match_pct": 67.92189679218968,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.00018227452738958966,
+        "max_diff_ulp_f32": 2790.0,
+        "rms_diff": 1.1609335167176374e-08,
+        "diff_snr_db": 148.6236867520567
+      },
+      "double_vs_reference": {
+        "samples": 1434,
+        "exact_bit_matches": 1434,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1434,
+        "exact_bit_matches": 974,
+        "exact_match_pct": 67.92189679218968,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.00018227452738958966,
+        "max_diff_ulp_f32": 2790.0,
+        "rms_diff": 1.1609335167176374e-08,
+        "diff_snr_db": 148.6236867520567
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_FASTEST",
+        "conv_id": 2,
+        "ratio": 0.7,
+        "channels": 3,
+        "out_frames": 717
+      },
+      "float_vs_double": {
+        "samples": 2151,
+        "exact_bit_matches": 1474,
+        "exact_match_pct": 68.52626685262669,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.00018227452738958966,
+        "max_diff_ulp_f32": 2790.0,
+        "rms_diff": 1.1364477930845626e-08,
+        "diff_snr_db": 148.7885398080736
+      },
+      "double_vs_reference": {
+        "samples": 2151,
+        "exact_bit_matches": 2151,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 2151,
+        "exact_bit_matches": 1474,
+        "exact_match_pct": 68.52626685262669,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 0.00018227452738958966,
+        "max_diff_ulp_f32": 2790.0,
+        "rms_diff": 1.1364477930845626e-08,
+        "diff_snr_db": 148.7885398080736
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_FASTEST",
+        "conv_id": 2,
+        "ratio": 1.0,
+        "channels": 1,
+        "out_frames": 1024
+      },
+      "float_vs_double": {
+        "samples": 1024,
+        "exact_bit_matches": 702,
+        "exact_match_pct": 68.5546875,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.247927908720222e-05,
+        "max_diff_ulp_f32": 291.0,
+        "rms_diff": 1.3475303345886986e-08,
+        "diff_snr_db": 147.3418251248312
+      },
+      "double_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 1024,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 702,
+        "exact_match_pct": 68.5546875,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.247927908720222e-05,
+        "max_diff_ulp_f32": 291.0,
+        "rms_diff": 1.3475303345886986e-08,
+        "diff_snr_db": 147.3418251248312
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_FASTEST",
+        "conv_id": 2,
+        "ratio": 1.0,
+        "channels": 2,
+        "out_frames": 1024
+      },
+      "float_vs_double": {
+        "samples": 2048,
+        "exact_bit_matches": 1402,
+        "exact_match_pct": 68.45703125,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.247927908720222e-05,
+        "max_diff_ulp_f32": 291.0,
+        "rms_diff": 1.3873081793235405e-08,
+        "diff_snr_db": 147.09393226908506
+      },
+      "double_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 2048,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 1402,
+        "exact_match_pct": 68.45703125,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.247927908720222e-05,
+        "max_diff_ulp_f32": 291.0,
+        "rms_diff": 1.3873081793235405e-08,
+        "diff_snr_db": 147.09393226908506
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_FASTEST",
+        "conv_id": 2,
+        "ratio": 1.0,
+        "channels": 3,
+        "out_frames": 1024
+      },
+      "float_vs_double": {
+        "samples": 3072,
+        "exact_bit_matches": 2103,
+        "exact_match_pct": 68.45703125,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.247927908720222e-05,
+        "max_diff_ulp_f32": 291.0,
+        "rms_diff": 1.3600858484754097e-08,
+        "diff_snr_db": 147.24607628563137
+      },
+      "double_vs_reference": {
+        "samples": 3072,
+        "exact_bit_matches": 3072,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 3072,
+        "exact_bit_matches": 2103,
+        "exact_match_pct": 68.45703125,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.247927908720222e-05,
+        "max_diff_ulp_f32": 291.0,
+        "rms_diff": 1.3600858484754097e-08,
+        "diff_snr_db": 147.24607628563137
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_FASTEST",
+        "conv_id": 2,
+        "ratio": 1.5,
+        "channels": 1,
+        "out_frames": 1536
+      },
+      "float_vs_double": {
+        "samples": 1536,
+        "exact_bit_matches": 1097,
+        "exact_match_pct": 71.41927083333333,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.2012638012361422e-05,
+        "max_diff_ulp_f32": 201.0,
+        "rms_diff": 1.2248269715119839e-08,
+        "diff_snr_db": 148.17107126200324
+      },
+      "double_vs_reference": {
+        "samples": 1536,
+        "exact_bit_matches": 1536,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1536,
+        "exact_bit_matches": 1097,
+        "exact_match_pct": 71.41927083333333,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.2012638012361422e-05,
+        "max_diff_ulp_f32": 201.0,
+        "rms_diff": 1.2248269715119839e-08,
+        "diff_snr_db": 148.17107126200324
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_FASTEST",
+        "conv_id": 2,
+        "ratio": 1.5,
+        "channels": 2,
+        "out_frames": 1537
+      },
+      "float_vs_double": {
+        "samples": 3074,
+        "exact_bit_matches": 2221,
+        "exact_match_pct": 72.25113858165257,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.2012638012361422e-05,
+        "max_diff_ulp_f32": 201.0,
+        "rms_diff": 1.2230683547063924e-08,
+        "diff_snr_db": 148.18475491971392
+      },
+      "double_vs_reference": {
+        "samples": 3074,
+        "exact_bit_matches": 3074,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 3074,
+        "exact_bit_matches": 2221,
+        "exact_match_pct": 72.25113858165257,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.2012638012361422e-05,
+        "max_diff_ulp_f32": 201.0,
+        "rms_diff": 1.2230683547063924e-08,
+        "diff_snr_db": 148.18475491971392
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_FASTEST",
+        "conv_id": 2,
+        "ratio": 1.5,
+        "channels": 3,
+        "out_frames": 1537
+      },
+      "float_vs_double": {
+        "samples": 4611,
+        "exact_bit_matches": 3379,
+        "exact_match_pct": 73.28128388635871,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.2012638012361422e-05,
+        "max_diff_ulp_f32": 201.0,
+        "rms_diff": 1.1894625153747011e-08,
+        "diff_snr_db": 148.4066846026863
+      },
+      "double_vs_reference": {
+        "samples": 4611,
+        "exact_bit_matches": 4611,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 4611,
+        "exact_bit_matches": 3379,
+        "exact_match_pct": 73.28128388635871,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 1.2012638012361422e-05,
+        "max_diff_ulp_f32": 201.0,
+        "rms_diff": 1.1894625153747011e-08,
+        "diff_snr_db": 148.4066846026863
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_FASTEST",
+        "conv_id": 2,
+        "ratio": 2.0,
+        "channels": 1,
+        "out_frames": 2048
+      },
+      "float_vs_double": {
+        "samples": 2048,
+        "exact_bit_matches": 1253,
+        "exact_match_pct": 61.181640625,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.247927908720222e-05,
+        "max_diff_ulp_f32": 291.0,
+        "rms_diff": 1.4942665280091024e-08,
+        "diff_snr_db": 146.44401860932157
+      },
+      "double_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 2048,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 1253,
+        "exact_match_pct": 61.181640625,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.247927908720222e-05,
+        "max_diff_ulp_f32": 291.0,
+        "rms_diff": 1.4942665280091024e-08,
+        "diff_snr_db": 146.44401860932157
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_FASTEST",
+        "conv_id": 2,
+        "ratio": 2.0,
+        "channels": 2,
+        "out_frames": 2048
+      },
+      "float_vs_double": {
+        "samples": 4096,
+        "exact_bit_matches": 2474,
+        "exact_match_pct": 60.400390625,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.247927908720222e-05,
+        "max_diff_ulp_f32": 291.0,
+        "rms_diff": 1.5444250404611224e-08,
+        "diff_snr_db": 146.16076761783194
+      },
+      "double_vs_reference": {
+        "samples": 4096,
+        "exact_bit_matches": 4096,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 4096,
+        "exact_bit_matches": 2474,
+        "exact_match_pct": 60.400390625,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.247927908720222e-05,
+        "max_diff_ulp_f32": 291.0,
+        "rms_diff": 1.5444250404611224e-08,
+        "diff_snr_db": 146.16076761783194
+      }
+    },
+    {
+      "case": {
+        "converter": "SINC_FASTEST",
+        "conv_id": 2,
+        "ratio": 2.0,
+        "channels": 3,
+        "out_frames": 2048
+      },
+      "float_vs_double": {
+        "samples": 6144,
+        "exact_bit_matches": 3698,
+        "exact_match_pct": 60.188802083333336,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.247927908720222e-05,
+        "max_diff_ulp_f32": 291.0,
+        "rms_diff": 1.5369805051740308e-08,
+        "diff_snr_db": 146.18265450538522
+      },
+      "double_vs_reference": {
+        "samples": 6144,
+        "exact_bit_matches": 6144,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 6144,
+        "exact_bit_matches": 3698,
+        "exact_match_pct": 60.188802083333336,
+        "max_abs_diff": 5.960464477539063e-08,
+        "max_rel_diff": 2.247927908720222e-05,
+        "max_diff_ulp_f32": 291.0,
+        "rms_diff": 1.5369805051740308e-08,
+        "diff_snr_db": 146.18265450538522
+      }
+    },
+    {
+      "case": {
+        "converter": "ZOH",
+        "conv_id": 3,
+        "ratio": 0.5,
+        "channels": 1,
+        "out_frames": 513
+      },
+      "float_vs_double": {
+        "samples": 513,
+        "exact_bit_matches": 513,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 513,
+        "exact_bit_matches": 513,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 513,
+        "exact_bit_matches": 513,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "ZOH",
+        "conv_id": 3,
+        "ratio": 0.5,
+        "channels": 2,
+        "out_frames": 513
+      },
+      "float_vs_double": {
+        "samples": 1026,
+        "exact_bit_matches": 1026,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 1026,
+        "exact_bit_matches": 1026,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1026,
+        "exact_bit_matches": 1026,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "ZOH",
+        "conv_id": 3,
+        "ratio": 0.5,
+        "channels": 3,
+        "out_frames": 513
+      },
+      "float_vs_double": {
+        "samples": 1539,
+        "exact_bit_matches": 1539,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 1539,
+        "exact_bit_matches": 1539,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1539,
+        "exact_bit_matches": 1539,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "ZOH",
+        "conv_id": 3,
+        "ratio": 0.7,
+        "channels": 1,
+        "out_frames": 717
+      },
+      "float_vs_double": {
+        "samples": 717,
+        "exact_bit_matches": 717,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 717,
+        "exact_bit_matches": 717,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 717,
+        "exact_bit_matches": 717,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "ZOH",
+        "conv_id": 3,
+        "ratio": 0.7,
+        "channels": 2,
+        "out_frames": 717
+      },
+      "float_vs_double": {
+        "samples": 1434,
+        "exact_bit_matches": 1434,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 1434,
+        "exact_bit_matches": 1434,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1434,
+        "exact_bit_matches": 1434,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "ZOH",
+        "conv_id": 3,
+        "ratio": 0.7,
+        "channels": 3,
+        "out_frames": 717
+      },
+      "float_vs_double": {
+        "samples": 2151,
+        "exact_bit_matches": 2151,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 2151,
+        "exact_bit_matches": 2151,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 2151,
+        "exact_bit_matches": 2151,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "ZOH",
+        "conv_id": 3,
+        "ratio": 1.0,
+        "channels": 1,
+        "out_frames": 1025
+      },
+      "float_vs_double": {
+        "samples": 1025,
+        "exact_bit_matches": 1025,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 1025,
+        "exact_bit_matches": 1025,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1025,
+        "exact_bit_matches": 1025,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "ZOH",
+        "conv_id": 3,
+        "ratio": 1.0,
+        "channels": 2,
+        "out_frames": 1025
+      },
+      "float_vs_double": {
+        "samples": 2050,
+        "exact_bit_matches": 2050,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 2050,
+        "exact_bit_matches": 2050,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 2050,
+        "exact_bit_matches": 2050,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "ZOH",
+        "conv_id": 3,
+        "ratio": 1.0,
+        "channels": 3,
+        "out_frames": 1025
+      },
+      "float_vs_double": {
+        "samples": 3075,
+        "exact_bit_matches": 3075,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 3075,
+        "exact_bit_matches": 3075,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 3075,
+        "exact_bit_matches": 3075,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "ZOH",
+        "conv_id": 3,
+        "ratio": 1.5,
+        "channels": 1,
+        "out_frames": 1537
+      },
+      "float_vs_double": {
+        "samples": 1537,
+        "exact_bit_matches": 1537,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 1537,
+        "exact_bit_matches": 1537,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1537,
+        "exact_bit_matches": 1537,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "ZOH",
+        "conv_id": 3,
+        "ratio": 1.5,
+        "channels": 2,
+        "out_frames": 1537
+      },
+      "float_vs_double": {
+        "samples": 3074,
+        "exact_bit_matches": 3074,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 3074,
+        "exact_bit_matches": 3074,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 3074,
+        "exact_bit_matches": 3074,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "ZOH",
+        "conv_id": 3,
+        "ratio": 1.5,
+        "channels": 3,
+        "out_frames": 1537
+      },
+      "float_vs_double": {
+        "samples": 4611,
+        "exact_bit_matches": 4611,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 4611,
+        "exact_bit_matches": 4611,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 4611,
+        "exact_bit_matches": 4611,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "ZOH",
+        "conv_id": 3,
+        "ratio": 2.0,
+        "channels": 1,
+        "out_frames": 2049
+      },
+      "float_vs_double": {
+        "samples": 2049,
+        "exact_bit_matches": 2049,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 2049,
+        "exact_bit_matches": 2049,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 2049,
+        "exact_bit_matches": 2049,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "ZOH",
+        "conv_id": 3,
+        "ratio": 2.0,
+        "channels": 2,
+        "out_frames": 2049
+      },
+      "float_vs_double": {
+        "samples": 4098,
+        "exact_bit_matches": 4098,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 4098,
+        "exact_bit_matches": 4098,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 4098,
+        "exact_bit_matches": 4098,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "ZOH",
+        "conv_id": 3,
+        "ratio": 2.0,
+        "channels": 3,
+        "out_frames": 2049
+      },
+      "float_vs_double": {
+        "samples": 6147,
+        "exact_bit_matches": 6147,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 6147,
+        "exact_bit_matches": 6147,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 6147,
+        "exact_bit_matches": 6147,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "LINEAR",
+        "conv_id": 4,
+        "ratio": 0.5,
+        "channels": 1,
+        "out_frames": 512
+      },
+      "float_vs_double": {
+        "samples": 512,
+        "exact_bit_matches": 512,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 512,
+        "exact_bit_matches": 512,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 512,
+        "exact_bit_matches": 512,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "LINEAR",
+        "conv_id": 4,
+        "ratio": 0.5,
+        "channels": 2,
+        "out_frames": 512
+      },
+      "float_vs_double": {
+        "samples": 1024,
+        "exact_bit_matches": 1024,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 1024,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 1024,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "LINEAR",
+        "conv_id": 4,
+        "ratio": 0.5,
+        "channels": 3,
+        "out_frames": 512
+      },
+      "float_vs_double": {
+        "samples": 1536,
+        "exact_bit_matches": 1536,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 1536,
+        "exact_bit_matches": 1536,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1536,
+        "exact_bit_matches": 1536,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "LINEAR",
+        "conv_id": 4,
+        "ratio": 0.7,
+        "channels": 1,
+        "out_frames": 717
+      },
+      "float_vs_double": {
+        "samples": 717,
+        "exact_bit_matches": 717,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 717,
+        "exact_bit_matches": 717,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 717,
+        "exact_bit_matches": 717,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "LINEAR",
+        "conv_id": 4,
+        "ratio": 0.7,
+        "channels": 2,
+        "out_frames": 717
+      },
+      "float_vs_double": {
+        "samples": 1434,
+        "exact_bit_matches": 1434,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 1434,
+        "exact_bit_matches": 1434,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1434,
+        "exact_bit_matches": 1434,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "LINEAR",
+        "conv_id": 4,
+        "ratio": 0.7,
+        "channels": 3,
+        "out_frames": 717
+      },
+      "float_vs_double": {
+        "samples": 2151,
+        "exact_bit_matches": 2151,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 2151,
+        "exact_bit_matches": 2151,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 2151,
+        "exact_bit_matches": 2151,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "LINEAR",
+        "conv_id": 4,
+        "ratio": 1.0,
+        "channels": 1,
+        "out_frames": 1024
+      },
+      "float_vs_double": {
+        "samples": 1024,
+        "exact_bit_matches": 1024,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 1024,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1024,
+        "exact_bit_matches": 1024,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "LINEAR",
+        "conv_id": 4,
+        "ratio": 1.0,
+        "channels": 2,
+        "out_frames": 1024
+      },
+      "float_vs_double": {
+        "samples": 2048,
+        "exact_bit_matches": 2048,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 2048,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 2048,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "LINEAR",
+        "conv_id": 4,
+        "ratio": 1.0,
+        "channels": 3,
+        "out_frames": 1024
+      },
+      "float_vs_double": {
+        "samples": 3072,
+        "exact_bit_matches": 3072,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 3072,
+        "exact_bit_matches": 3072,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 3072,
+        "exact_bit_matches": 3072,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "LINEAR",
+        "conv_id": 4,
+        "ratio": 1.5,
+        "channels": 1,
+        "out_frames": 1537
+      },
+      "float_vs_double": {
+        "samples": 1537,
+        "exact_bit_matches": 1537,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 1537,
+        "exact_bit_matches": 1537,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 1537,
+        "exact_bit_matches": 1537,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "LINEAR",
+        "conv_id": 4,
+        "ratio": 1.5,
+        "channels": 2,
+        "out_frames": 1537
+      },
+      "float_vs_double": {
+        "samples": 3074,
+        "exact_bit_matches": 3074,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 3074,
+        "exact_bit_matches": 3074,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 3074,
+        "exact_bit_matches": 3074,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "LINEAR",
+        "conv_id": 4,
+        "ratio": 1.5,
+        "channels": 3,
+        "out_frames": 1537
+      },
+      "float_vs_double": {
+        "samples": 4611,
+        "exact_bit_matches": 4611,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 4611,
+        "exact_bit_matches": 4611,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 4611,
+        "exact_bit_matches": 4611,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "LINEAR",
+        "conv_id": 4,
+        "ratio": 2.0,
+        "channels": 1,
+        "out_frames": 2048
+      },
+      "float_vs_double": {
+        "samples": 2048,
+        "exact_bit_matches": 2048,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 2048,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 2048,
+        "exact_bit_matches": 2048,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "LINEAR",
+        "conv_id": 4,
+        "ratio": 2.0,
+        "channels": 2,
+        "out_frames": 2048
+      },
+      "float_vs_double": {
+        "samples": 4096,
+        "exact_bit_matches": 4096,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 4096,
+        "exact_bit_matches": 4096,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 4096,
+        "exact_bit_matches": 4096,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    },
+    {
+      "case": {
+        "converter": "LINEAR",
+        "conv_id": 4,
+        "ratio": 2.0,
+        "channels": 3,
+        "out_frames": 2048
+      },
+      "float_vs_double": {
+        "samples": 6144,
+        "exact_bit_matches": 6144,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "double_vs_reference": {
+        "samples": 6144,
+        "exact_bit_matches": 6144,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      },
+      "float_vs_reference": {
+        "samples": 6144,
+        "exact_bit_matches": 6144,
+        "exact_match_pct": 100.0,
+        "max_abs_diff": 0.0,
+        "max_rel_diff": 0.0,
+        "max_diff_ulp_f32": 0.0,
+        "rms_diff": 0.0,
+        "diff_snr_db": Infinity
+      }
+    }
+  ],
+  "reference_failures": [],
+  "global": {
+    "cases_compared": 75,
+    "cases_reference_checked": 75,
+    "float_vs_double_exact_pct": 82.04017082305654,
+    "double_path_max_ulp_vs_ref": 0.0,
+    "float_path_max_ulp_vs_ref": 10176.0,
+    "double_path_rel_vs_ref": {
+      "max": 0.0,
+      "mean": 0.0
+    },
+    "float_path_rel_vs_ref": {
+      "max": 0.0007139244523965825,
+      "mean": 5.4284009134175706e-05
+    },
+    "reference_failures": 0
+  }
+}
