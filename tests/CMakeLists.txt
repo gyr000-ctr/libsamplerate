@@ -93,3 +93,11 @@ target_link_libraries(src-evaluate
     $<$<BOOL:${FFTW3_FOUND}>:FFTW3::fftw3>
     $<$<BOOL:${SndFile_FOUND}>:${SNDFILE_TARGET}>
    )
+
+# Runs in both precision configurations and dumps hex-float output for
+# the external float-vs-double comparison performed in CI / output checks.
+add_executable(double_precision_test double_precision_test.c util.c util.h)
+target_link_libraries(double_precision_test PRIVATE samplerate)
+add_test(NAME double_precision_test
+         COMMAND double_precision_test double_precision_dump.txt
+         WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/src)
