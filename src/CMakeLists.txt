@@ -30,6 +30,7 @@ cmake_pop_check_state()
 
 add_library(samplerate
   common.h
+  src_precision.h
   fastest_coeffs.h
   high_qual_coeffs.h
   mid_qual_coeffs.h

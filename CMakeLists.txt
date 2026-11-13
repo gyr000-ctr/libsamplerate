@@ -56,6 +56,13 @@ if(LIBSAMPLERATE_SSE2_LRINT)
   add_definitions(-DENABLE_SSE2_LRINT)
 endif()
 
+# Keep the internal data plane (filter coefficients, delay line and
+# accumulation) in double precision. The public API stays float based.
+option(LIBSAMPLERATE_DOUBLE_PRECISION "Use double precision for the internal resampling chain" OFF)
+if(LIBSAMPLERATE_DOUBLE_PRECISION)
+  add_definitions(-DLIBSAMPLERATE_DOUBLE_PRECISION)
+endif()
+
 if(CMAKE_C_COMPILER_ID STREQUAL "GNU" OR CMAKE_C_COMPILER_ID MATCHES "Clang")
   option(LIBSAMPLERATE_ENABLE_SANITIZERS "Enable ASAN and UBSAN" OFF)
 

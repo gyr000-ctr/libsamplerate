@@ -46,6 +46,8 @@
 
 #include <math.h>
 
+#include "src_precision.h"
+
 #ifdef HAVE_VISIBILITY
   #define LIBSAMPLERATE_DLL_PRIVATE __attribute__ ((visibility ("hidden")))
 #elif defined (__APPLE__)
