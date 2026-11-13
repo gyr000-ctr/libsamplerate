@@ -129,6 +129,8 @@ typedef enum SRC_ERROR
 	SRC_ERR_NO_VARIABLE_RATIO,
 	SRC_ERR_SINC_PREPARE_DATA_BAD_LEN,
 	SRC_ERR_BAD_INTERNAL_STATE,
+	SRC_ERR_BAD_BIT_DEPTH,
+	SRC_ERR_WRONG_API,
 
 	/* This must be the last error number. */
 	SRC_ERR_MAX_ERROR
@@ -152,6 +154,27 @@ typedef struct SRC_STATE_VT_tag
 	void			(*close) (SRC_STATE *state) ;
 } SRC_STATE_VT ;
 
+/*----------------------------------------------------------
+**	Integer / fixed-point PCM path (src_pcm.c, src_pcm_sinc.c).
+*/
+
+/* PCM sample layout descriptor for the fixed-point path. */
+typedef struct
+{	int		in_bits ;		/* 16, 24 or 32 */
+	int		out_bits ;		/* 16, 24 or 32 */
+	int		interleaved ;	/* non-zero -> interleaved, zero -> planar */
+} PCM_LAYOUT ;
+
+/*
+** Reader/writer function types. For interleaved layouts, `in`/`out`
+** point to the single interleaved buffer. For planar layouts they
+** point to an array of `channels` per-channel buffer pointers.
+** Samples are exchanged with the converters as int32 Q31 fixed point
+** (full scale == 2**31).
+*/
+typedef int32_t	(*pcm_read_fn) (const void *in, long frame, int ch, int channels) ;
+typedef void	(*pcm_write_fn) (void *out, long frame, int ch, int channels, int32_t q31) ;
+
 struct SRC_STATE_tag
 {
 	SRC_STATE_VT *vt ;
@@ -169,6 +192,14 @@ struct SRC_STATE_tag
 	void			*user_callback_data ;
 	long			saved_frames ;
 	const float		*saved_data ;
+
+	/*
+	** Fixed-point PCM process function and sample layout. pcm_process
+	** is non-NULL only for states created with src_pcm_new() ; it is
+	** NULL for the classic float path.
+	*/
+	SRC_ERROR		(*pcm_process) (SRC_STATE *state, SRC_PCM_DATA *data) ;
+	PCM_LAYOUT		pcm_layout ;
 
 	/* Pointer to data to converter specific data. */
 	void	*private_data ;
@@ -191,6 +222,18 @@ const char* zoh_get_name (int src_enum) ;
 const char* zoh_get_description (int src_enum) ;
 
 SRC_STATE *zoh_state_new (int channels, SRC_ERROR *error) ;
+
+/* In src_pcm.c. Both return NULL for an invalid bit depth. */
+pcm_read_fn		pcm_select_reader (int bits, int interleaved) ;
+pcm_write_fn	pcm_select_writer (int bits, int interleaved) ;
+
+int pcm_is_valid_bits (int bits) ;
+
+SRC_STATE *pcm_zoh_state_new (int channels, const PCM_LAYOUT *layout, SRC_ERROR *error) ;
+SRC_STATE *pcm_linear_state_new (int channels, const PCM_LAYOUT *layout, SRC_ERROR *error) ;
+
+/* In src_pcm_sinc.c */
+SRC_STATE *pcm_sinc_state_new (int converter_type, int channels, const PCM_LAYOUT *layout, SRC_ERROR *error) ;
 
 /*----------------------------------------------------------
 ** SIMD optimized math functions.

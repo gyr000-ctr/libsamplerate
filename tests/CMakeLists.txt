@@ -72,6 +72,13 @@ add_executable(float_short_test float_short_test.c)
 target_link_libraries(float_short_test PRIVATE samplerate)
 add_test(NAME float_short_test COMMAND float_short_test WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/src)
 
+add_executable(pcm_test pcm_test.c util.c util.h)
+target_link_libraries(pcm_test PRIVATE samplerate)
+add_test(NAME pcm_test COMMAND pcm_test WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/src)
+
+add_executable(pcm_throughput_test pcm_throughput_test.c util.c util.h)
+target_link_libraries(pcm_throughput_test PRIVATE samplerate)
+
 add_executable(snr_bw_test snr_bw_test.c calc_snr.c util.c util.h)
 target_link_libraries(snr_bw_test
   PRIVATE

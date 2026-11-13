@@ -43,3 +43,10 @@
 	global:
 		src_clone ;
 } @PACKAGE@.so.0.1;
+
+@PACKAGE@.so.0.3
+{
+	global:
+		src_pcm_new ;
+		src_pcm_process ;
+} @PACKAGE@.so.0.2;

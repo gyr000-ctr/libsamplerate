@@ -170,6 +170,73 @@ enum
 } ;
 
 /*
+** Optional integer / fixed-point processing path.
+**
+** This path is explicitly opt-in : states are created with src_pcm_new()
+** and processed with src_pcm_process(). The existing float API, the
+** default converters and the library ABI are completely unchanged ; a
+** state created with src_new() behaves bit-for-bit as before, and a
+** state created with src_pcm_new() must only be used with
+** src_pcm_process() (mixing the two APIs on one state is an error).
+**
+** The integer path accepts signed 16, 24 or 32 bit PCM (see the
+** SRC_PCM_* enums below) and processes it internally in fixed point
+** without any floating point intermediate sample data. Conversion
+** ratios, converter latency and stream (seek/reset) semantics are
+** identical to the float path. Output matches the float path with the
+** same configuration to within a small agreed LSB tolerance.
+**
+** 24 bit samples are packed, little-endian, 3 bytes per sample.
+**
+** When the state is created with interleaved != 0, data_in/data_out
+** point to a single buffer of interleaved samples. When interleaved
+** == 0 (planar / non-interleaved), data_in must point to an array of
+** `channels` pointers, one pointer per channel (ie data_in is a
+** `const void * const *` and data_out is a `void * const *`), each
+** pointing to a per-channel buffer of input_frames/output_frames
+** samples.
+*/
+
+enum
+{
+	SRC_PCM_S16		= 16,
+	SRC_PCM_S24		= 24,
+	SRC_PCM_S32		= 32
+} ;
+
+/* SRC_PCM_DATA is used to pass PCM data to src_pcm_process(). */
+typedef struct
+{	const void	*data_in ;
+	void		*data_out ;
+
+	long	input_frames, output_frames ;
+	long	input_frames_used, output_frames_gen ;
+
+	int		end_of_input ;
+
+	double	src_ratio ;
+} SRC_PCM_DATA ;
+
+/*
+**	Create a state for the integer / fixed-point path.
+**	converter_type is one of the SRC_SINC_* / SRC_ZERO_ORDER_HOLD /
+**	SRC_LINEAR enums. input_bits and output_bits must each be one of
+**	SRC_PCM_S16, SRC_PCM_S24 or SRC_PCM_S32. interleaved != 0 selects
+**	interleaved sample layout, interleaved == 0 selects planar layout.
+**	Error returned in *error.
+*/
+
+SRC_STATE* src_pcm_new (int converter_type, int channels,
+				int input_bits, int output_bits, int interleaved, int *error) ;
+
+/*
+**	Processing function for states created with src_pcm_new().
+**	Returns non zero on error.
+*/
+
+int src_pcm_process (SRC_STATE *state, SRC_PCM_DATA *data) ;
+
+/*
 ** Extra helper functions for converting from short to float and
 ** back again.
 */

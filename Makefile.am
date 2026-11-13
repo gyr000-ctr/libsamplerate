@@ -30,6 +30,7 @@ CLEANFILES = src/src_sinc.s
 # MinGW requires -no-undefined if a DLL is to be built.
 src_libsamplerate_la_LDFLAGS = -no-undefined -version-info $(SHARED_VERSION_INFO) $(SHLIB_VERSION_ARG)
 src_libsamplerate_la_SOURCES = src/samplerate.c src/src_sinc.c src/src_zoh.c src/src_linear.c \
+	src/src_pcm.c src/src_pcm_sinc.c \
 	src/common.h src/fastest_coeffs.h src/mid_qual_coeffs.h src/high_qual_coeffs.h
 
 #-------------------------------------------------------------------------------
@@ -56,7 +57,7 @@ AUTOHEADER=echo
 
 dist_doc_DATA = docs/SRC.png docs/SRC.css docs/index.md docs/license.md docs/history.md \
 	docs/download.md docs/lists.md docs/quality.md docs/win32.md docs/faq.md docs/api.md \
-	docs/api_simple.md docs/api_callback.md docs/api_full.md docs/api_misc.md docs/bugs.md
+	docs/api_simple.md docs/api_callback.md docs/api_full.md docs/api_misc.md docs/api_pcm.md docs/bugs.md
 
 #############
 # examples/ #
@@ -87,6 +88,7 @@ TESTS = \
 	tests/misc_test \
 	tests/multi_channel_test \
 	tests/nullptr_test \
+	tests/pcm_test \
 	tests/reset_test \
 	tests/simple_test \
 	tests/snr_bw_test \
@@ -97,6 +99,7 @@ TESTS = \
 check_PROGRAMS = \
 	$(TESTS) \
 	tests/multichan_throughput_test \
+	tests/pcm_throughput_test \
 	tests/src-evaluate
 
 #===============================================================================
@@ -112,6 +115,12 @@ tests_callback_hang_test_LDADD = src/libsamplerate.la
 
 tests_simple_test_SOURCES = tests/simple_test.c tests/util.c tests/util.h
 tests_simple_test_LDADD = src/libsamplerate.la
+
+tests_pcm_test_SOURCES = tests/pcm_test.c tests/util.c tests/util.h
+tests_pcm_test_LDADD = src/libsamplerate.la
+
+tests_pcm_throughput_test_SOURCES = tests/pcm_throughput_test.c tests/util.c tests/util.h
+tests_pcm_throughput_test_LDADD = src/libsamplerate.la
 
 tests_reset_test_SOURCES = tests/reset_test.c tests/util.c tests/util.h
 tests_reset_test_LDADD = src/libsamplerate.la

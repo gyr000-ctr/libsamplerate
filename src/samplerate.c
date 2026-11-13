@@ -92,6 +92,10 @@ src_process (SRC_STATE *state, SRC_DATA *data)
 	if (state->mode != SRC_MODE_PROCESS)
 		return SRC_ERR_BAD_MODE ;
 
+	/* States created with src_pcm_new() must use src_pcm_process(). */
+	if (state->pcm_process != NULL)
+		return SRC_ERR_WRONG_API ;
+
 	/* Check for valid SRC_DATA first. */
 	if (data == NULL)
 		return SRC_ERR_BAD_DATA ;
@@ -141,6 +145,150 @@ src_process (SRC_STATE *state, SRC_DATA *data)
 
 	return error ;
 } /* src_process */
+
+/*==========================================================================
+**	Integer / fixed-point PCM path.
+*/
+
+SRC_STATE *
+src_pcm_new (int converter_type, int channels, int input_bits, int output_bits, int interleaved, int *error)
+{
+	SRC_ERROR	temp_error = SRC_ERR_NO_ERROR ;
+	SRC_STATE	*state = NULL ;
+	PCM_LAYOUT	layout ;
+
+	if (channels < 1)
+	{	temp_error = SRC_ERR_BAD_CHANNEL_COUNT ;
+		state = NULL ;
+		goto exit ;
+		} ;
+
+	if (! pcm_is_valid_bits (input_bits) || ! pcm_is_valid_bits (output_bits))
+	{	temp_error = SRC_ERR_BAD_BIT_DEPTH ;
+		state = NULL ;
+		goto exit ;
+		} ;
+
+	layout.in_bits = input_bits ;
+	layout.out_bits = output_bits ;
+	layout.interleaved = interleaved ? 1 : 0 ;
+
+	switch (converter_type)
+	{
+#ifdef ENABLE_SINC_BEST_CONVERTER
+		case SRC_SINC_BEST_QUALITY :
+			state = pcm_sinc_state_new (converter_type, channels, &layout, &temp_error) ;
+			break ;
+#endif
+#ifdef ENABLE_SINC_MEDIUM_CONVERTER
+		case SRC_SINC_MEDIUM_QUALITY :
+			state = pcm_sinc_state_new (converter_type, channels, &layout, &temp_error) ;
+			break ;
+#endif
+#ifdef ENABLE_SINC_FAST_CONVERTER
+		case SRC_SINC_FASTEST :
+			state = pcm_sinc_state_new (converter_type, channels, &layout, &temp_error) ;
+			break ;
+#endif
+		case SRC_ZERO_ORDER_HOLD :
+			state = pcm_zoh_state_new (channels, &layout, &temp_error) ;
+			break ;
+		case SRC_LINEAR :
+			state = pcm_linear_state_new (channels, &layout, &temp_error) ;
+			break ;
+		default :
+			temp_error = SRC_ERR_BAD_CONVERTER ;
+			state = NULL ;
+			break ;
+		}
+
+	if (state)
+		state->pcm_layout = layout ;
+
+exit :
+	if (error)
+		*error = (int) temp_error ;
+
+	return state ;
+} /* src_pcm_new */
+
+int
+src_pcm_process (SRC_STATE *state, SRC_PCM_DATA *data)
+{
+	if (state == NULL)
+		return SRC_ERR_BAD_STATE ;
+
+	if (state->mode != SRC_MODE_PROCESS)
+		return SRC_ERR_BAD_MODE ;
+
+	/* States created with src_new() must use src_process(). */
+	if (state->pcm_process == NULL)
+		return SRC_ERR_WRONG_API ;
+
+	/* Check for valid SRC_PCM_DATA first. */
+	if (data == NULL)
+		return SRC_ERR_BAD_DATA ;
+
+	/* And that data_in and data_out are valid. */
+	if ((data->data_in == NULL && data->input_frames > 0)
+			|| (data->data_out == NULL && data->output_frames > 0))
+		return SRC_ERR_BAD_DATA_PTR ;
+
+	/* Check src_ratio is in range. */
+	if (is_bad_src_ratio (data->src_ratio))
+		return SRC_ERR_BAD_SRC_RATIO ;
+
+	if (data->input_frames < 0)
+		data->input_frames = 0 ;
+	if (data->output_frames < 0)
+		data->output_frames = 0 ;
+
+	/* Check for overlapping input/output buffers. */
+	{
+		const PCM_LAYOUT *layout = &state->pcm_layout ;
+		int in_bytes = layout->in_bits / 8 ;
+		int out_bytes = layout->out_bits / 8 ;
+
+		if (layout->interleaved)
+		{
+			const char *in0 = (const char *) data->data_in ;
+			const char *in1 = in0 + data->input_frames * state->channels * in_bytes ;
+			const char *out0 = (const char *) data->data_out ;
+			const char *out1 = out0 + data->output_frames * state->channels * out_bytes ;
+
+			if (in0 < out1 && out0 < in1)
+				return SRC_ERR_DATA_OVERLAP ;
+			}
+		else if (data->data_in != NULL && data->data_out != NULL)
+		{
+			const void *const *in_planes = (const void *const *) data->data_in ;
+			void *const *out_planes = (void *const *) data->data_out ;
+
+			for (int ci = 0 ; ci < state->channels ; ci++)
+				for (int co = 0 ; co < state->channels ; co++)
+				{
+					const char *in0 = (const char *) in_planes [ci] ;
+					const char *in1 = in0 + data->input_frames * in_bytes ;
+					const char *out0 = (const char *) out_planes [co] ;
+					const char *out1 = out0 + data->output_frames * out_bytes ;
+
+					if (in0 < out1 && out0 < in1)
+						return SRC_ERR_DATA_OVERLAP ;
+					} ;
+			} ;
+		}
+
+	/* Set the input and output counts to zero. */
+	data->input_frames_used = 0 ;
+	data->output_frames_gen = 0 ;
+
+	/* Special case for when last_ratio has not been set. */
+	if (state->last_ratio < (1.0 / SRC_MAX_RATIO))
+		state->last_ratio = data->src_ratio ;
+
+	/* Now process. */
+	return state->pcm_process (state, data) ;
+} /* src_pcm_process */
 
 long
 src_callback_read (SRC_STATE *state, double src_ratio, long frames, float *data)
@@ -392,6 +540,10 @@ src_strerror (int error)
 				return "Internal error : Bad length in prepare_data ()." ;
 		case SRC_ERR_BAD_INTERNAL_STATE :
 				return "Error : Someone is trampling on my internal state." ;
+		case SRC_ERR_BAD_BIT_DEPTH :
+				return "PCM bit depth must be 16, 24 or 32." ;
+		case SRC_ERR_WRONG_API :
+				return "State and process function mismatch (float src_process v integer src_pcm_process)." ;
 
 		case SRC_ERR_MAX_ERROR :
 				return "Placeholder. No error defined for this error number." ;

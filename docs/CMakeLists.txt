@@ -4,6 +4,7 @@ install(
     api_callback.md
     api_full.md
     api_misc.md
+    api_pcm.md
     api_simple.md
     bugs.md
     download.md
