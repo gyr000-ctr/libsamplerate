@@ -160,6 +160,11 @@ you will always get 2000 samples at the output. You will always need to keep
 track of the number of input frames used on each call to src_process() and deal
 with these values appropriately.
 
+The size of this transport delay can be queried for a given converter and
+conversion ratio using
+[**src\_get\_latency**](api_full.md#get-latency), which returns it as a whole
+number of input frames.
+
 ## Q7 : I have input and output sample rates that are integer values, but the API wants me to divide one by the other and put the result in a floating point number. Won't this case problems for long running conversions? {#Q007}
 
 The short answer is no, the precision of the ratio is many orders of magnitude

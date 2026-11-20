@@ -144,3 +144,41 @@ starting conversion ratio of the next call to **src_process** or
 
 This function returns non-zero on error and the error return value can be
 decoded into a text string using the function documented [here](api_misc.md#error-reporting).
+
+## Get Latency
+
+```c
+int src_get_latency (SRC_STATE *state, double src_ratio) ;
+```
+
+The **src\_get\_latency** function returns the converter's latency for the
+given conversion ratio, expressed as a whole number of input frames (samples
+per channel). The latency is the number of input frames by which the output
+stream appears to trail the input stream: the converter must read that far
+ahead of the output it is producing. A freshly initialised converter needs one
+more input frame than this before it can emit its first output frame, and
+thereafter output frame *n* corresponds to input position *n / src\_ratio*.
+
+The value depends only on the converter type and on **src\_ratio**, so
+querying it for a new ratio immediately reflects that ratio; a call to
+**src\_process** is not required first. The query consumes no samples and does
+not modify the converter state, so the audio produced by subsequent processing
+is unchanged.
+
+For the **SRC\_SINC\_\*** converters the latency is the one sided lookahead of
+the interpolation kernel: constant for ratios greater than or equal to 1.0 and
+growing in inverse proportion to the ratio when down-sampling. The
+**SRC\_ZERO\_ORDER\_HOLD** and **SRC\_LINEAR** converters report a latency of
+one frame at every ratio. To express the latency in output frames, multiply by
+**src\_ratio**; to express it in seconds, divide by the input sample rate.
+
+On success the return value is zero or positive. On failure a negative value is
+returned, which is the negated error number and can be decoded with
+[**src\_strerror**](api_misc.md#error-reporting). A NULL **state** (converter
+not initialised) and a **src\_ratio** outside the range [1/256, 256] return
+different, distinguishable error values.
+
+The function only reads the converter state and takes no lock, so it is safe
+to call concurrently with itself on the same state. As with every function in
+this library, the state must not be processed, reset, cloned or deleted by
+another thread while a query is in progress.

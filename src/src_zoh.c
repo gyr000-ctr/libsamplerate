@@ -22,6 +22,7 @@ static SRC_ERROR zoh_vari_process (SRC_STATE *state, SRC_DATA *data) ;
 static void zoh_reset (SRC_STATE *state) ;
 static SRC_STATE *zoh_copy (SRC_STATE *state) ;
 static void zoh_close (SRC_STATE *state) ;
+static int zoh_get_latency (SRC_STATE *state, double src_ratio) ;
 
 /*========================================================================================
 */
@@ -42,7 +43,8 @@ static SRC_STATE_VT zoh_state_vt =
 	zoh_vari_process,
 	zoh_reset,
 	zoh_copy,
-	zoh_close
+	zoh_close,
+	zoh_get_latency
 } ;
 
 /*----------------------------------------------------------------------------------------
@@ -231,6 +233,22 @@ zoh_reset (SRC_STATE *state)
 
 	return ;
 } /* zoh_reset */
+
+/*
+** The zero order hold converter repeats the most recent input frame, so its
+** output trails the input by a single frame at every ratio. Nothing is
+** written, so concurrent calls are safe.
+*/
+static int
+zoh_get_latency (SRC_STATE *state, double src_ratio)
+{
+	(void) src_ratio ;
+
+	if (state == NULL || state->private_data == NULL)
+		return -SRC_ERR_NO_PRIVATE ;
+
+	return 1 ;
+} /* zoh_get_latency */
 
 static SRC_STATE *
 zoh_copy (SRC_STATE *state)

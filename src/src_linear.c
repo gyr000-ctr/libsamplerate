@@ -22,6 +22,7 @@ static SRC_ERROR linear_vari_process (SRC_STATE *state, SRC_DATA *data) ;
 static void linear_reset (SRC_STATE *state) ;
 static SRC_STATE *linear_copy (SRC_STATE *state) ;
 static void linear_close (SRC_STATE *state) ;
+static int linear_get_latency (SRC_STATE *state, double src_ratio) ;
 
 /*========================================================================================
 */
@@ -44,7 +45,8 @@ static SRC_STATE_VT linear_state_vt =
 	linear_vari_process,
 	linear_reset,
 	linear_copy,
-	linear_close
+	linear_close,
+	linear_get_latency
 } ;
 
 /*----------------------------------------------------------------------------------------
@@ -242,6 +244,23 @@ linear_reset (SRC_STATE *state)
 
 	return ;
 } /* linear_reset */
+
+/*
+** Linear interpolation uses the current input frame and the previous one, so
+** the output trails the input by a single frame at every ratio. Reading the
+** private data is not needed, but it is checked for validity for consistency
+** with the other converters. Nothing is written, so concurrent calls are safe.
+*/
+static int
+linear_get_latency (SRC_STATE *state, double src_ratio)
+{
+	(void) src_ratio ;
+
+	if (state == NULL || state->private_data == NULL)
+		return -SRC_ERR_NO_PRIVATE ;
+
+	return 1 ;
+} /* linear_get_latency */
 
 SRC_STATE *
 linear_copy (SRC_STATE *state)

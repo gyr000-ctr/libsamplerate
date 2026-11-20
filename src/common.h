@@ -150,6 +150,16 @@ typedef struct SRC_STATE_VT_tag
 
 	/* State close. */
 	void			(*close) (SRC_STATE *state) ;
+
+	/*
+	** Latency, in whole input frames, that this converter requires at the
+	** supplied ratio, or a negative SRC_ERROR value. The ratio has already
+	** been range checked by the caller. Implementations must be read-only
+	** (they may not touch last_ratio, last_position or the private data) so
+	** that concurrent queries are data-race free and cannot perturb audio
+	** that is being processed.
+	*/
+	int				(*get_latency) (SRC_STATE *state, double src_ratio) ;
 } SRC_STATE_VT ;
 
 struct SRC_STATE_tag

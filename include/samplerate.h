@@ -129,6 +129,44 @@ int src_set_ratio (SRC_STATE *state, double new_ratio) ;
 int src_get_channels (SRC_STATE *state) ;
 
 /*
+**	Get the converter latency for a given conversion ratio, expressed as a
+**	whole number of input frames (samples per channel).
+**
+**	The latency is the number of input frames by which the output stream
+**	appears "behind" the input stream: the converter must read that far
+**	ahead of the output it is producing. In practice a freshly initialised
+**	converter needs one more input frame than this before it can emit its
+**	first output frame, and thereafter output frame n corresponds to input
+**	position n / src_ratio. It depends only on the converter type and on
+**	src_ratio, so a query for a new ratio returns the value for that ratio
+**	immediately; no call to src_process() is needed first, and the query
+**	consumes no samples and leaves the stream output bit-for-bit unchanged.
+**
+**	For the SRC_SINC_* converters the latency is the one sided lookahead of
+**	the interpolation kernel. It is constant for ratios >= 1.0 and grows in
+**	inverse proportion to the ratio when down-sampling. The
+**	SRC_ZERO_ORDER_HOLD and SRC_LINEAR converters only use the current and
+**	previous input frame, so they report a latency of one frame at every
+**	ratio.
+**
+**	On success the return value is zero or positive. On failure a negative
+**	value is returned, which is the negated SRC error number and can be
+**	decoded with src_strerror() :
+**
+**		-SRC_ERR_BAD_STATE     : state is NULL (converter not initialised).
+**		-SRC_ERR_BAD_SRC_RATIO : src_ratio is outside the [1/256, 256] range
+**		                         (including zero, negative and NaN values).
+**
+**	The distinct error values let the caller tell the two failure modes
+**	apart. The function only reads the converter state and takes no lock, so
+**	it is safe to call concurrently with itself on the same state. As with
+**	every function here, the state must not be processed, reset, cloned or
+**	deleted by another thread while a query is running.
+*/
+
+int src_get_latency (SRC_STATE *state, double src_ratio) ;
+
+/*
 **	Reset the internal SRC state.
 **	Does not modify the quality settings.
 **	Does not free any memory allocations.

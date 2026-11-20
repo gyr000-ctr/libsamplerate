@@ -84,6 +84,7 @@ static SRC_ERROR prepare_data (SINC_FILTER *filter, int channels, SRC_DATA *data
 static void sinc_reset (SRC_STATE *state) ;
 static SRC_STATE *sinc_copy (SRC_STATE *state) ;
 static void sinc_close (SRC_STATE *state) ;
+static int sinc_get_latency (SRC_STATE *state, double src_ratio) ;
 
 static SRC_STATE_VT sinc_multichan_state_vt =
 {
@@ -91,7 +92,8 @@ static SRC_STATE_VT sinc_multichan_state_vt =
 	sinc_multichan_vari_process,
 	sinc_reset,
 	sinc_copy,
-	sinc_close
+	sinc_close,
+	sinc_get_latency
 } ;
 
 static SRC_STATE_VT sinc_hex_state_vt =
@@ -100,7 +102,8 @@ static SRC_STATE_VT sinc_hex_state_vt =
 	sinc_hex_vari_process,
 	sinc_reset,
 	sinc_copy,
-	sinc_close
+	sinc_close,
+	sinc_get_latency
 } ;
 
 static SRC_STATE_VT sinc_quad_state_vt =
@@ -109,7 +112,8 @@ static SRC_STATE_VT sinc_quad_state_vt =
 	sinc_quad_vari_process,
 	sinc_reset,
 	sinc_copy,
-	sinc_close
+	sinc_close,
+	sinc_get_latency
 } ;
 
 static SRC_STATE_VT sinc_stereo_state_vt =
@@ -118,7 +122,8 @@ static SRC_STATE_VT sinc_stereo_state_vt =
 	sinc_stereo_vari_process,
 	sinc_reset,
 	sinc_copy,
-	sinc_close
+	sinc_close,
+	sinc_get_latency
 } ;
 
 static SRC_STATE_VT sinc_mono_state_vt =
@@ -127,7 +132,8 @@ static SRC_STATE_VT sinc_mono_state_vt =
 	sinc_mono_vari_process,
 	sinc_reset,
 	sinc_copy,
-	sinc_close
+	sinc_close,
+	sinc_get_latency
 } ;
 
 static inline increment_t
@@ -326,6 +332,37 @@ sinc_reset (SRC_STATE *state)
 	/* Set this for a sanity check */
 	memset (filter->buffer + filter->b_len, 0xAA, state->channels * sizeof (filter->buffer [0])) ;
 } /* sinc_reset */
+
+/*
+** Latency in whole input frames. This is the one sided lookahead of the
+** interpolation kernel: the processing loops need
+** (coeff_half_len + 2) / index_inc input frames on each side of the output
+** position, divided by the ratio when down-sampling. The expression below is
+** the same one the process functions use for half_filter_chan_len, minus the
+** channel scaling (this value is in frames, not samples). The value is
+** constant for ratio >= 1.0 and grows as 1/ratio below it.
+**
+** Only immutable fields are read here, so this is safe to call concurrently.
+*/
+static int
+sinc_get_latency (SRC_STATE *state, double src_ratio)
+{	SINC_FILTER *filter ;
+	double		count ;
+
+	if (state == NULL || state->private_data == NULL)
+		return -SRC_ERR_NO_PRIVATE ;
+
+	filter = (SINC_FILTER *) state->private_data ;
+
+	if (filter->sinc_magic_marker != SINC_MAGIC_MARKER)
+		return -SRC_ERR_BAD_INTERNAL_STATE ;
+
+	count = (filter->coeff_half_len + 2.0) / filter->index_inc ;
+	if (src_ratio < 1.0)
+		count /= src_ratio ;
+
+	return (int) (psf_lrint (count) + 1) ;
+} /* sinc_get_latency */
 
 static SRC_STATE *
 sinc_copy (SRC_STATE *state)

@@ -261,6 +261,30 @@ src_get_channels (SRC_STATE *state)
 } /* src_get_channels */
 
 int
+src_get_latency (SRC_STATE *state, double src_ratio)
+{
+	SRC_STATE_VT *vt ;
+
+	if (state == NULL)
+		return -SRC_ERR_BAD_STATE ;
+
+	/* Reject NaN as well: the range comparisons in is_bad_src_ratio() are
+	** all false for NaN, so it would otherwise be accepted.
+	*/
+	if (src_ratio != src_ratio || is_bad_src_ratio (src_ratio))
+		return -SRC_ERR_BAD_SRC_RATIO ;
+
+	/* Snapshot the vtable once and then call a read-only function. No state
+	** is written and no lock is taken, so concurrent queries cannot race.
+	*/
+	vt = state->vt ;
+	if (vt == NULL || vt->get_latency == NULL)
+		return -SRC_ERR_BAD_PROC_PTR ;
+
+	return vt->get_latency (state, src_ratio) ;
+} /* src_get_latency */
+
+int
 src_reset (SRC_STATE *state)
 {
 	if (state == NULL)
