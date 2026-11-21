@@ -393,6 +393,11 @@ src_strerror (int error)
 		case SRC_ERR_BAD_INTERNAL_STATE :
 				return "Error : Someone is trampling on my internal state." ;
 
+		case SRC_ERR_BAD_DITHER_TYPE :
+				return "Bad dither type." ;
+		case SRC_ERR_BAD_BIT_DEPTH :
+				return "Target bit depth must be in the range [1, 16]." ;
+
 		case SRC_ERR_MAX_ERROR :
 				return "Placeholder. No error defined for this error number." ;
 

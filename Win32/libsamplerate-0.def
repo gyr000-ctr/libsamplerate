@@ -28,3 +28,8 @@ src_int_to_float_array		@80
 src_float_to_int_array		@81
 
 src_get_channels		@90
+
+src_dither_new			@100
+src_dither_delete		@101
+src_dither_reset		@102
+src_float_to_short_array_dithered	@103

@@ -143,3 +143,70 @@ The float data is assumed to be in the range [-1.0, 1.0] and it is automatically
 scaled on the conversion to and from float. On the float to short/int conversion
 path, any data values which would overflow the range of short/int data are
 clipped.
+
+## Optional Dither
+
+The plain **src_float_to_short_array** function rounds to nearest without dither.
+On very quiet or near-silent material the rounding error is then correlated with
+the signal, which can sound granular. An optional dither stage can be enabled
+through a small state object:
+
+```c
+typedef struct SRC_DITHER_STATE_tag SRC_DITHER_STATE ;
+
+enum
+{
+    SRC_DITHER_NONE         = 0,
+    SRC_DITHER_TPDF         = 1,
+    SRC_DITHER_NOISE_SHAPED = 2
+} ;
+
+SRC_DITHER_STATE *src_dither_new (int dither_type, int bit_depth, int channels, int *error) ;
+SRC_DITHER_STATE *src_dither_delete (SRC_DITHER_STATE *state) ;
+int src_dither_reset (SRC_DITHER_STATE *state) ;
+int src_float_to_short_array_dithered (SRC_DITHER_STATE *state,
+        const float *in, short *out, int frames) ;
+```
+
+**SRC_DITHER_TPDF** adds triangular (TPDF) dither of one LSB at the target bit
+depth before rounding. This removes the correlation between quantisation error
+and signal, at the cost of a small increase in the noise floor.
+
+**SRC_DITHER_NOISE_SHAPED** adds the same dither and additionally feeds the
+previous quantisation error back with a negative sign, so the error spectrum is
+high passed by (1 - z^-1) and the audible noise is reduced. This is the mode to
+use when the quiet passages must be as clean as possible.
+
+**SRC_DITHER_NONE** leaves the samples unchanged. At a target depth of 16 bits
+the output is bit-for-bit identical to **src_float_to_short_array**.
+
+The **bit_depth** parameter is the target word length in bits, in the range
+[1, 16]. The **short** output is always in the full 16 bit range, and the internal
+dither step is scaled to the target depth, so a lower **bit_depth** quantises
+more coarsely. **channels** is the number of interleaved channels; the input and
+output are frame based exactly as for **src_float_to_short_array** (a frame is
+one sample per channel).
+
+The noise for each sample is a function of the channel, the target bit depth and
+the sample's position in the stream only. Consequently different channels and
+different depths never share noise, repeated runs are reproducible, and splitting
+a stream into calls of any size gives exactly the same samples as one large call.
+Use **src_dither_reset** to rewind a stream.
+
+Failures are reported with an error number that **src_strerror** decodes. The
+create function distinguishes **SRC_ERR_BAD_DITHER_TYPE**,
+**SRC_ERR_BAD_BIT_DEPTH**, **SRC_ERR_BAD_CHANNEL_COUNT** and
+**SRC_ERR_MALLOC_FAILED**; the convert function returns **SRC_ERR_BAD_STATE** for
+a NULL or uninitialised state, **SRC_ERR_DATA_OVERLAP** when the input and output
+byte ranges overlap, and **SRC_ERR_BAD_DATA_PTR** for a NULL buffer.
+
+A dither state is not thread safe: one state must only be used by one thread at
+a time. Different states may be used concurrently.
+
+On typical x86-64 hardware the TPDF path is at least as fast as the undithered
+conversion, because it uses a wider (eight sample) vector loop. The noise shaped
+path is the more expensive mode: the error feedback is a serial recurrence, so
+even with the per-group prefix scan it costs roughly 1.2 times the undithered
+conversion for mono and about twice for interleaved multichannel data at 16
+bits. If throughput matters more than the last few dB of low level noise, use
+TPDF.

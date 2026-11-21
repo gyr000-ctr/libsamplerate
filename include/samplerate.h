@@ -22,6 +22,46 @@ extern "C" {
 /* Opaque data type SRC_STATE. */
 typedef struct SRC_STATE_tag SRC_STATE ;
 
+/*
+** Error numbers returned by the API functions. They are part of the public
+** interface so that a caller can tell failure modes apart; src_strerror()
+** converts any of them into a text string.
+*/
+typedef enum SRC_ERROR
+{
+	SRC_ERR_NO_ERROR = 0,
+
+	SRC_ERR_MALLOC_FAILED,
+	SRC_ERR_BAD_STATE,
+	SRC_ERR_BAD_DATA,
+	SRC_ERR_BAD_DATA_PTR,
+	SRC_ERR_NO_PRIVATE,
+	SRC_ERR_BAD_SRC_RATIO,
+	SRC_ERR_BAD_PROC_PTR,
+	SRC_ERR_SHIFT_BITS,
+	SRC_ERR_FILTER_LEN,
+	SRC_ERR_BAD_CONVERTER,
+	SRC_ERR_BAD_CHANNEL_COUNT,
+	SRC_ERR_SINC_BAD_BUFFER_LEN,
+	SRC_ERR_SIZE_INCOMPATIBILITY,
+	SRC_ERR_BAD_PRIV_PTR,
+	SRC_ERR_BAD_SINC_STATE,
+	SRC_ERR_DATA_OVERLAP,
+	SRC_ERR_BAD_CALLBACK,
+	SRC_ERR_BAD_MODE,
+	SRC_ERR_NULL_CALLBACK,
+	SRC_ERR_NO_VARIABLE_RATIO,
+	SRC_ERR_SINC_PREPARE_DATA_BAD_LEN,
+	SRC_ERR_BAD_INTERNAL_STATE,
+
+	/* Dithering errors. */
+	SRC_ERR_BAD_DITHER_TYPE,
+	SRC_ERR_BAD_BIT_DEPTH,
+
+	/* This must be the last error number. */
+	SRC_ERR_MAX_ERROR
+} SRC_ERROR ;
+
 /* SRC_DATA is used to pass data to src_simple() and src_process(). */
 typedef struct
 {	const float	*data_in ;
@@ -179,6 +219,75 @@ void src_float_to_short_array (const float *in, short *out, int len) ;
 
 void src_int_to_float_array (const int *in, float *out, int len) ;
 void src_float_to_int_array (const float *in, int *out, int len) ;
+
+/*
+** Optional dithering for float -> short conversion.
+**
+** src_float_to_short_array() rounds to nearest without dither, which is
+** audibly granular on quiet material. The functions below add an optional,
+** explicitly enabled dither stage while leaving the output bit-for-bit
+** unchanged when dithering is disabled.
+**
+** SRC_DITHER_NONE          : No dither. Output is sample-for-sample identical
+**                            to src_float_to_short_array() when bit_depth is
+**                            16.
+** SRC_DITHER_TPDF          : Flat TPDF dither, 2 LSB peak-to-peak, added
+**                            before rounding.
+** SRC_DITHER_NOISE_SHAPED  : TPDF dither followed by first order high-pass
+**                            error feedback (E(z) = (1 - z^-1) Q(z)), which
+**                            moves the quantisation noise towards high
+**                            frequencies where it is less audible.
+**
+** The noise is generated independently for every channel and every target
+** bit depth, and the generator state persists across calls so that streaming
+** in chunks gives the same result as one large call. Call src_dither_reset()
+** to restart a stream from the beginning.
+**
+** A dither state is not thread safe: a single state must only be used by one
+** thread at a time. Different states may be used concurrently.
+*/
+
+typedef struct SRC_DITHER_STATE_tag SRC_DITHER_STATE ;
+
+enum
+{
+	SRC_DITHER_NONE			= 0,
+	SRC_DITHER_TPDF			= 1,
+	SRC_DITHER_NOISE_SHAPED	= 2
+} ;
+
+/*
+** Create / destroy a dither state.
+**
+** dither_type must be one of the SRC_DITHER_* values above, bit_depth must
+** be in the range [1, 16] and channels must be >= 1. On failure NULL is
+** returned and *error (when not NULL) is set to a distinct SRC error value:
+** SRC_ERR_BAD_DITHER_TYPE, SRC_ERR_BAD_BIT_DEPTH,
+** SRC_ERR_BAD_CHANNEL_COUNT or SRC_ERR_MALLOC_FAILED.
+*/
+SRC_DITHER_STATE *src_dither_new (int dither_type, int bit_depth, int channels, int *error) ;
+
+/* Free a dither state. Always returns NULL. NULL is accepted. */
+SRC_DITHER_STATE *src_dither_delete (SRC_DITHER_STATE *state) ;
+
+/* Restart the dither stream: RNGs and noise shaping history are reset to the
+** values they had immediately after src_dither_new(). Returns an error
+** number, SRC_ERR_BAD_STATE if state is NULL. */
+int src_dither_reset (SRC_DITHER_STATE *state) ;
+
+/*
+** Convert frames frames (samples per channel) of interleaved float data to
+** short data using the dither state.
+**
+** Returns an error number which can be decoded with src_strerror(). In
+** particular SRC_ERR_BAD_STATE (state NULL or not initialised),
+** SRC_ERR_BAD_PRIV_PTR (state memory corrupted) and SRC_ERR_DATA_OVERLAP
+** (the input and output byte ranges overlap) are reported here, while
+** SRC_ERR_BAD_DITHER_TYPE, SRC_ERR_BAD_BIT_DEPTH and
+** SRC_ERR_BAD_CHANNEL_COUNT are reported by src_dither_new().
+*/
+int src_float_to_short_array_dithered (SRC_DITHER_STATE *state,
+		const float *in, short *out, int frames) ;
 
 
 #ifdef __cplusplus

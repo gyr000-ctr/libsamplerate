@@ -43,3 +43,12 @@
 	global:
 		src_clone ;
 } @PACKAGE@.so.0.1;
+
+@PACKAGE@.so.0.3
+{
+	global:
+		src_dither_new ;
+		src_dither_delete ;
+		src_dither_reset ;
+		src_float_to_short_array_dithered ;
+} @PACKAGE@.so.0.2;
